@@ -1,0 +1,4 @@
+# VSCode artifacts
+.vscode/*
+*.code-workspace
+.history/
