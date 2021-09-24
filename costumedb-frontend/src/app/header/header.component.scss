@@ -1,5 +1,225 @@
+$orange: #BC6C25;
+
 nav {
-  background-color: gray;
+  color: white;
+  box-shadow: 0px 1px 4px 1px rgb(0 0 0 / 23%);
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  padding: 0 4rem;
+  background-color: white;
+  color: #222;
+  border-bottom: 4px solid $orange;
+}
+
+.tab {
+  padding: 1rem;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  position: relative;
+  &::after {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 2px;
+    background-color: $orange;
+    border-radius: 2px;
+    bottom: 10px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    transition: all 0.2s;
+  }
+  &.active {
+    color: $orange;
+    font-weight: bold;
+    &::after {
+      width: 90%;
+    }
+  }
+  &:hover, &:focus {
+    color: $orange;
+  }
+}
+
+#theme button {
+  display: none;
+}
+
+#theme-dropdown {
+  display: none;
+  position: fixed;
+  background-color: $orange;
+  padding: 0.5rem 1.5rem;
+  line-height: 2rem;
+  list-style: none;
+  margin: 1rem 0;
+  a {
+    transition: all 0.2s;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    &:hover {
+      color: #ffffffab;;
+    }
+  }
+}
+
+#theme:hover, #theme:focus, #theme:focus-within {
+  #theme-dropdown {
+    display: block;
+  }
+}
+
+#search {
+  display: flex;
+  position: relative;
+  padding: 1rem;
+
+  input, button {
+    background: none;
+    border: none;
+  }
+
+  button {
+    cursor: pointer;
+    height: 26px;
+    width: 26px;
+  }
+
+  .underline {
+    transition: all 0.2s;
+    position: absolute;
+    height: 3px;
+    bottom: calc(1rem - 3px);
+    width: 0%;
+    right: 0;
+    background-color: $orange;
+    &.forceunderline {
+      width: 100%;
+    }
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  input:focus, input:hover {
+    &+.underline {
+      width: 100%;
+    }
+  }
+}
+
+.mobile-wrapper, #toggleMobileMenu {
+  display: none;
+}
+
+@media only screen and (max-width: 786px) {
+  nav {
+    padding: 0 1rem;
+  }
+  input {
+    max-width: 70px;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .mobile-wrapper {
+    display: block;
+    background-color: white;
+    box-shadow: 0px 1px 4px 1px rgb(0 0 0 / 23%);
+    height: 50px;
+    border-bottom: 4px solid $orange;
+  }
+
+  #toggleMobileMenu {
+    display: block;
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    border: none;
+    background: none;
+    height: 40px;
+    width: 40px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    box-sizing: border-box;
+    width: 100%;
+    top: 0;
+    padding-top: 1rem;
+    font-size: 18px;
+    &.showMobile {
+      display: flex;
+    }
+  }
+
+  .tab {
+    width: 100%;
+  }
+
+  .tab, #search {
+    padding: 0.5rem;
+    .underline {
+      bottom: 0.5rem;
+    }
+  }
+
+  #search button {
+    height: 30px;
+    width: 30px;
+  }
+
+  input {
+    max-width: inherit;
+  }
+
+  .underline {
+    width: 100% !important;
+  }
+
+  #theme-dropdown {
+    position: relative;
+  }
+
+  #theme button {
+    display: inline;
+  }
+
+  #theme-dropdown {
+    display: block !important;
+    max-height: 0px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    transition: all 0.2s;
+  }
+
+  #theme-dropdown.show {
+    max-height: 100px;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+  }
+
+  .tab.active::after {
+      width: 0%;
+  }
+
+  .expand {
+    border: none;
+    background: none;
+    height: 30px;
+    width: 30px;
+  }
 }

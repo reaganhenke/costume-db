@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { GroupSearchComponent } from './group-search/group-search.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SharePageComponent } from './share-page/share-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SharePageComponent } from './share-page/share-page.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({}, {}),
     extModules
   ],
