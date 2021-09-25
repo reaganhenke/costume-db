@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  search = new FormControl('');
+  mobileMenu = false;
+  expandThemes = false;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  submitSearch() {
+    console.log(this.search.value);
   }
 
+  toggleMobileMenu() {
+    this.mobileMenu = !this.mobileMenu;
+  }
+
+  toggleTheme() {
+    this.expandThemes = !this.expandThemes;
+  }
 }
