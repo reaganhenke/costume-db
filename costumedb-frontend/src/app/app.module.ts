@@ -12,6 +12,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { SharePageComponent } from './share-page/share-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ThemePageComponent } from './theme-page/theme-page.component';
+import { PrivacyPolicyComponent } from './footer-pages/privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ThemePageComponent } from './theme-page/theme-page.component';
     GroupSearchComponent,
     HomePageComponent,
     SharePageComponent,
-    ThemePageComponent
+    ThemePageComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
