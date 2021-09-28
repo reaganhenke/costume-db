@@ -13,6 +13,9 @@ import { SharePageComponent } from './share-page/share-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ThemePageComponent } from './theme-page/theme-page.component';
 import { PrivacyPolicyComponent } from './footer-pages/privacy-policy/privacy-policy.component';
+import { reducer } from 'src/state/groupsearch.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { GroupSearchEffects } from 'src/state/groupsearch.effects';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { PrivacyPolicyComponent } from './footer-pages/privacy-policy/privacy-po
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ groupSearch: reducer}),
+    EffectsModule.forRoot([GroupSearchEffects]),
     extModules
   ],
   providers: [],
