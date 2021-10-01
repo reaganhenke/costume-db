@@ -16,6 +16,8 @@ import { PrivacyPolicyComponent } from './footer-pages/privacy-policy/privacy-po
 import { reducer } from 'src/state/groupsearch.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { GroupSearchEffects } from 'src/state/groupsearch.effects';
+import { GroupSearchService } from './group-search/group-search.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { GroupSearchEffects } from 'src/state/groupsearch.effects';
     PrivacyPolicyComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -36,7 +39,7 @@ import { GroupSearchEffects } from 'src/state/groupsearch.effects';
     EffectsModule.forRoot([GroupSearchEffects]),
     extModules
   ],
-  providers: [],
+  providers: [GroupSearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

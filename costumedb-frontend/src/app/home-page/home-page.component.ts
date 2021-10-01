@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { testAction } from 'src/state/groupsearch.actions';
 import { GroupSearchState } from 'src/state/groupsearch.reducer';
 
 @Component({
@@ -14,10 +13,4 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  test() {
-    console.log('testing store');
-    this.store.dispatch(testAction())
-  }
-
 }

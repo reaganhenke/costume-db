@@ -1,1 +1,70 @@
-<p>group-search works!</p>
+<h2>group search</h2> 
+<ng-container *ngIf="!(loaded$ | async) && !(loading$ | async)">
+  <div *ngIf="!groupSize">
+    <div class="content-wrapper">
+      <p>Let's find your group the perfect costume.</p>
+      <p>First, how many people are in your group? 
+        <span class="input-wrapper">
+          <input (keyup.enter)="next()" type="text" [ngClass]="!groupSizeForm.valid ? 'error' : ''" [formControl]="groupSizeForm">
+          <div *ngIf="!groupSizeForm.valid && groupSizeForm.dirty" class="error-msg">max 9</div>
+        </span>
+      </p>
+      <button (click)="next()" [disabled]="!groupSizeForm.valid">next</button>
+    </div>
+  </div>
+  <div *ngIf="groupSize">
+    <p>Now tell us what costumes you're looking for</p>
+
+    <div *ngFor="let costume of group; let i = index" class="costume-form">
+      <button (click)="removeCostume(i)">X</button>
+      <img src="../../assets/ghost.svg" alt="ghost">
+
+      <form [formGroup]="group[i]">
+        <label for="gender-{{i}}">Gender: </label>
+        <select id="gender-{{i}}" formControlName="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="any">Any</option>
+        </select>
+
+        <label for="hair-{{i}}">Hair Color: </label>
+        <select id="hair-{{i}}" formControlName="hair">
+          <option value="blone">Blonde</option>
+          <option value="black">Black</option>
+          <option value="brown">Brown</option>
+          <option value="any">Any</option>
+        </select>
+      </form>
+
+    </div>
+    <button (click)="addCostume()">add</button>
+
+    <button (click)="submit()">submit</button>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="(loading$ | async)">
+  LOADING
+</ng-container>
+
+<ng-container *ngIf="(loaded$ | async)">
+  <ng-container *ngIf="!(error$ | async); else error">
+    <span *ngIf="results$ | async as results">
+      <span *ngIf="results.length > 0; else noresults">
+        YAY RESULTS with LENGTH
+        <div *ngFor="let costume of results">
+          {{costume.name}}
+        </div>
+      </span>
+    </span>
+  </ng-container>
+  <button (click)="retry()">retry</button>
+</ng-container>
+
+<ng-template #error>
+  oops there was an error
+</ng-template>
+
+<ng-template #noresults>
+  no results for you
+</ng-template>

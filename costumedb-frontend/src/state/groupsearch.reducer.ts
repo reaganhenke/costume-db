@@ -1,26 +1,42 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import { Costume } from '../app/models/costume.model';
 import * as GroupSearchActions from './groupsearch.actions';
-import { GroupSearchEffects } from './groupsearch.effects';
 
 export interface GroupSearchState {
-  testValue: number;
+  loading: boolean;
+  loaded: boolean;
+  error: string | null;
+  results: Costume[];
 }
 
 export const initialState: GroupSearchState = {
-  testValue: 0
+  loading: false,
+  loaded: false,
+  error: null,
+  results: []
 };
-
 
 const groupSearchReducer = createReducer(
   initialState,
-  on(GroupSearchActions.testAction, state => ({ testValue: state.testValue + 1 })),
- 
-  // on(HeroActions.deleteHeroError, (state, { error }) => ({
-  //   ...state,
-  //   heroes: [...state.heroes, error.requestData],
-  //   loading: false
-  // })),
-  
+  on(GroupSearchActions.loadGroupCostumes, state => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    results: []
+  })),
+  on(GroupSearchActions.loadGroupCostumesSuccess, (state, { response }) => ({
+    ...state,
+    loading: false,
+    loaded: true,
+    results: response
+  })),
+  on(GroupSearchActions.loadGroupCostumesError, (state, { error }) => ({
+    ...state,
+    loading: false,
+    loaded: true,
+    error: error
+  })),
+  on(GroupSearchActions.clearGroupCostumesSearch, state => initialState)
 );
 
 export function reducer(state: GroupSearchState | undefined, action: Action) {
