@@ -17,6 +17,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { GroupSearchEffects } from 'src/state/groupsearch.effects';
 import { GroupSearchService } from './group-search/group-search.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CreditComponent } from './footer-pages/credit/credit.component';
+import { FeedbackComponent } from './footer-pages/feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     GroupSearchComponent,
     SharePageComponent,
     ThemePageComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    CreditComponent,
+    FeedbackComponent
   ],
   imports: [
     HttpClientModule,

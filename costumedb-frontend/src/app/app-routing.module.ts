@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreditComponent } from './footer-pages/credit/credit.component';
+import { FeedbackComponent } from './footer-pages/feedback/feedback.component';
 import { PrivacyPolicyComponent } from './footer-pages/privacy-policy/privacy-policy.component';
 import { GroupSearchComponent } from './group-search/group-search.component';
 import { SharePageComponent } from './share-page/share-page.component';
@@ -14,8 +16,9 @@ const routes: Routes = [
   { path: 'groupsearch', component: GroupSearchComponent },
   { path: 'share', component: SharePageComponent },
   { path: 'theme/:theme', component: ThemePageComponent },
-  { path: 'privacy', component: PrivacyPolicyComponent }
-
+  { path: 'privacy', component: PrivacyPolicyComponent },
+  { path: 'credit', component: CreditComponent },
+  { path: 'feedback', component: FeedbackComponent }
 ];
 
 @NgModule({
