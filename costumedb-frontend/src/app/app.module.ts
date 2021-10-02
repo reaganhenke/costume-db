@@ -19,6 +19,7 @@ import { GroupSearchService } from './group-search/group-search.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CreditComponent } from './footer-pages/credit/credit.component';
 import { FeedbackComponent } from './footer-pages/feedback/feedback.component';
+import { TermsofuseComponent } from './footer-pages/termsofuse/termsofuse.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FeedbackComponent } from './footer-pages/feedback/feedback.component';
     ThemePageComponent,
     PrivacyPolicyComponent,
     CreditComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    TermsofuseComponent
   ],
   imports: [
     HttpClientModule,

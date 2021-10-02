@@ -1,7 +1,6 @@
 
 <nav [ngClass]="{'showMobile': mobileMenu}">
   <a class="tab" routerLinkActive="active" routerLink="/groupsearch">Search Your Group</a>
-  <a class="tab" routerLinkActive="active" routerLink="/share">Share a Costume</a>
   <div class="tab" id="theme" tabindex="0" routerLinkActive="active" routerLink="/theme">
     <span (click)="toggleTheme()"> Costumes By Theme
       <button class="expand">
@@ -15,6 +14,7 @@
       <li><a href="/theme/scary">Scary</a></li>
     </ul>
   </div>
+  <a class="tab" routerLinkActive="active" routerLink="/share">Share a Costume</a>
 
   <div id="search">
     <input (keyup.enter)="submitSearch()" type="text" [formControl]="search">
