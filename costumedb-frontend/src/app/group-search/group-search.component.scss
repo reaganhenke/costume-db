@@ -1,3 +1,6 @@
+$orange: #BC6C25;
+$black: #373737;
+
 h3 {
   margin: 0;
   margin-bottom: 1rem;
@@ -14,7 +17,7 @@ h3 {
 
 button {
   align-self: flex-end;
-  background-color: #37373f;
+  background-color: $black;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -45,14 +48,14 @@ p {
   }
   input {
     font-size: 14px;
-    border: 1px solid black;
+    border: 1px solid $black;
     padding: 3px;
     border-radius: 4px;
     width: 75px;
     margin-left: 8px;
   
     &:focus-visible {
-      outline: #BC6C25 auto 1px;
+      outline: $orange auto 1px;
     }
     &.error {
       outline: #9e2e44 auto 1px;
@@ -90,13 +93,20 @@ p {
 
   .close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     background: none;
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
-    color: #585858;
+    margin: 0;
+    padding: 0;
+
+    img {
+      height: 12px;
+      width: 12px;
+      margin: 0;
+    }
   }
 
   &.remove {
@@ -116,11 +126,77 @@ p {
 
 .form-body {
   display: flex;
+  align-items: flex-start;
 }
 
 select {
+  font-size: 14px;
+  border: none;
+  background: #ededed;
+  border-radius: 6px;
+  padding: 4px;
+  font-size: 14px;
+  border-bottom: 2px solid transparent;
+  min-width: 80px;
+
   &:focus-visible {
-    outline: #BC6C25 auto 1px;
+    outline: none;
+    border-bottom: 2px solid $orange;
+  }
+}
+
+.basics, .advanced {
+  label:not(:first-child) {
+    margin-left: 16px;
+  }
+}
+
+.advancedToggle {
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  position: relative;
+  input[type="checkbox"] {
+    position: absolute;
+    height: 19px;
+    width: 19px;
+    top: 0;
+    opacity: 0;
+    &:focus ~ span {
+      border: 2px solid $orange;
+      &::after {
+        border: solid $orange;
+        border-width: 0px 2px 2px 0px;
+      }
+    }
+    &:checked ~ span::after {
+      display: block;
+    }
+  }
+
+  span {
+    height: 14px;
+    width: 14px;
+    margin: 4px;
+    border: 2px solid $black;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    pointer-events: none;
+  }
+
+  span::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 4px;
+    height: 10px;
+    width: 4px;
+    border: solid $black;
+    border-width: 0px 2px 2px 0px;
+    transform: rotate(45deg);
+    display: none;
   }
 }
 

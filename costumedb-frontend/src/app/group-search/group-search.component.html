@@ -13,23 +13,22 @@
     </div>
   </div>
   <div *ngIf="groupSize" class="groupforms">
-    <p>Now tell us about the costumes you're looking for</p>
+    <p>Now tell us about the costumes you're looking for!</p>
     <div *ngFor="let costume of group; let i = index" class="costume-form" id="costume-{{i}}">
       <h3>costume {{i + 1}}</h3>
-      <button (click)="removeCostume(i)" class="close">X</button>
+      <button (click)="removeCostume(i)" class="close"><img alt="close" src="../../assets/close.svg"></button>
 
       <span class="form-body">
         <img src="../../assets/ghost.svg" alt="ghost">
 
         <form [formGroup]="costume">
-          <span>
+          <span class="basics">
             <label for="gender-{{i}}">Gender: </label>
             <select id="gender-{{i}}" formControlName="gender">
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="">Any</option>
             </select>
-  
             <label for="hair-{{i}}">Hair Color: </label>
             <select id="hair-{{i}}" formControlName="hair">
               <option value="blone">Blonde</option>
@@ -39,20 +38,20 @@
             </select>  
           </span>
           
-          <span>
+          <span class="advancedToggle">
             <input type="checkbox" id="hair-{{i}}" formControlName="showAdvanced">  
-            <label for="hair-{{i}}">show advanced</label>
+            <span></span><label for="hair-{{i}}">show advanced</label>
           </span>
 
-          <div *ngIf="costume.get('showAdvanced')?.value" >
+          <div *ngIf="costume.get('showAdvanced')?.value" class="advanced">
             <label for="body-{{i}}">body type: </label>
             <select id="body-{{i}}" formControlName="bodyType">
-              <option value="any">Any</option>
+              <option value="">Any</option>
             </select>
 
             <label for="ethnicity-{{i}}">ethnicity: </label>
             <select id="ethnicity-{{i}}" formControlName="ethnicity">
-              <option value="any">Any</option>
+              <option value="">Any</option>
             </select>
           </div>
 
