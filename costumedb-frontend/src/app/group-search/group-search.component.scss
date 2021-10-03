@@ -80,7 +80,7 @@ p {
 
   animation: fadeIn 0.2s;
 
-  max-height: 200px;
+  max-height: 600px;
   overflow: hidden;
   opacity: 100;
 
@@ -133,8 +133,9 @@ select {
   font-size: 14px;
   border: none;
   background: #ededed;
-  border-radius: 6px;
+  border-radius: 6px 6px 0 0;
   padding: 4px;
+  margin: 0 5px;
   font-size: 14px;
   border-bottom: 2px solid transparent;
   min-width: 80px;
@@ -146,6 +147,8 @@ select {
 }
 
 .basics, .advanced {
+  display: flex;
+  align-items: center;
   label:not(:first-child) {
     margin-left: 16px;
   }
@@ -227,5 +230,18 @@ form {
   }
   .reset {
     background-color: #9e2e44;
+  }
+}
+
+
+@media only screen and (max-width: 485px) {
+  .basics, .advanced {
+    flex-direction: column;
+    label {
+      margin: 8px 0 !important;
+    }
+  }
+  .button-wrapper {
+    align-self: center;
   }
 }
