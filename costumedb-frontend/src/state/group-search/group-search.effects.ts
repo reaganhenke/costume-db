@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { GroupSearchService } from 'src/app/group-search/group-search.service';
-import * as GroupSearchActions from './groupsearch.actions';
+import * as GroupSearchActions from './group-search.actions';
 
 @Injectable()
 export class GroupSearchEffects {

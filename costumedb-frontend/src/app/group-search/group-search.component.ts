@@ -3,7 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/state/appState';
-import { clearGroupCostumesSearch, loadGroupCostumes } from 'src/state/groupsearch.actions';
+import { clearGroupCostumesSearch, loadGroupCostumes } from 'src/state/group-search/group-search.actions';
+import { CostumeRequestObject } from '../models/costume-request.model';
 import { CostumeResponseObject } from '../models/costume-response.model';
 
 @Component({
@@ -72,12 +73,12 @@ export class GroupSearchComponent implements OnDestroy {
   }
 
   submit() {
-    let values: String[] = [];
+    let values: CostumeRequestObject[] = [];
     this.group.forEach(costume => {
       costume.removeControl('showAdvanced');
       values.push(costume.value)
     });
-    this.store.dispatch(loadGroupCostumes(values));
+    this.store.dispatch(loadGroupCostumes({request: values}));
   }
 
   reset() {

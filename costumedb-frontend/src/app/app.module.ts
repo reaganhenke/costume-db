@@ -12,14 +12,18 @@ import { SharePageComponent } from './share-page/share-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ThemePageComponent } from './theme-page/theme-page.component';
 import { PrivacyPolicyComponent } from './footer-pages/privacy-policy/privacy-policy.component';
-import { reducer } from 'src/state/groupsearch.reducer';
+import { reducer as groupSearchReducer } from 'src/state/group-search/group-search.reducer';
+import { reducer as themeSearchReducer } from 'src/state/theme-search/theme-search.reducer';
+import { reducer as textSearchReducer } from 'src/state/text-search/text-search.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { GroupSearchEffects } from 'src/state/groupsearch.effects';
+import { GroupSearchEffects } from 'src/state/group-search/group-search.effects';
 import { GroupSearchService } from './group-search/group-search.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CreditComponent } from './footer-pages/credit/credit.component';
 import { FeedbackComponent } from './footer-pages/feedback/feedback.component';
 import { TermsofuseComponent } from './footer-pages/termsofuse/termsofuse.component';
+import { TextSearchEffects } from 'src/state/text-search/text-search.effects';
+import { ThemeSearchEffects } from 'src/state/theme-search/theme-search.effects';
 
 @NgModule({
   declarations: [
@@ -32,18 +36,26 @@ import { TermsofuseComponent } from './footer-pages/termsofuse/termsofuse.compon
     PrivacyPolicyComponent,
     CreditComponent,
     FeedbackComponent,
-    TermsofuseComponent
+    TermsofuseComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ groupSearch: reducer}),
-    EffectsModule.forRoot([GroupSearchEffects]),
-    extModules
+    StoreModule.forRoot({
+      groupSearch: groupSearchReducer,
+      themeSearch: themeSearchReducer,
+      textSearch: textSearchReducer
+    }),
+    EffectsModule.forRoot([
+      GroupSearchEffects,
+      ThemeSearchEffects,
+      TextSearchEffects
+    ]),
+    extModules,
   ],
   providers: [GroupSearchService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

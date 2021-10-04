@@ -1,9 +1,10 @@
 import { createAction, props } from '@ngrx/store';
+import { CostumeRequestObject } from 'src/app/models/costume-request.model';
 import { CostumeResponseObject } from 'src/app/models/costume-response.model';
 
 export const loadGroupCostumes = createAction(
   '[Group Search] Load Group Costumes',
-  (request: any) => request
+  props<{request: CostumeRequestObject[]}>()
 );
 
 export const loadGroupCostumesSuccess = createAction(
