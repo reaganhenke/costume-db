@@ -68,27 +68,37 @@
 </ng-container>
 
 <ng-container *ngIf="(loading$ | async)">
-  LOADING
+  LOADING . . .
 </ng-container>
 
-<ng-container *ngIf="(loaded$ | async)">
+<div class="loaded-wrapper" *ngIf="(loaded$ | async)">
   <ng-container *ngIf="!(error$ | async); else error">
     <span *ngIf="results$ | async as results">
       <span *ngIf="results.length > 0; else noresults">
-        YAY RESULTS with LENGTH
-        <div *ngFor="let costume of results">
-          {{costume.name}}
+        <p>We've found the following costumes for you: </p>
+        <div class="results-wrapper">
+          <div *ngFor="let costume of results" class="costume-result">
+            <h3>{{costume.name}}</h3>
+            <img src="{{costume.imageUrl}}">
+            <p>{{costume.description}}</p>
+          </div>
         </div>
+        <p>Missing something? Help us out by <a href="share">submitting your own costume ideas</a>!</p>
       </span>
     </span>
   </ng-container>
-  <button (click)="retry()">retry</button>
-</ng-container>
+  <button (click)="retry()" class="retry">retry</button>
+</div>
 
 <ng-template #error>
-  oops there was an error
+  <p>Uh oh! We were unable to search our database. Try again later!</p>
+  <p>If this keeps happening, give us a heads up by <a href="feedback">submitting a bug report</a>.</p>
 </ng-template>
 
 <ng-template #noresults>
-  no results for you
+  <p>
+    Uh oh! We didn't find any costumes for your group, but we're adding new ones 
+    all the time. Help us out by <a href="share">submitting your costume ideas</a>,
+    or try being less specific with your search and trying again!
+  </p>
 </ng-template>

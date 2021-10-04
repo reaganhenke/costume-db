@@ -1,12 +1,12 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Costume } from '../app/models/costume.model';
+import { CostumeResponseObject } from 'src/app/models/costume-response.model';
 import * as GroupSearchActions from './groupsearch.actions';
 
 export interface GroupSearchState {
   loading: boolean;
   loaded: boolean;
   error: string | null;
-  results: Costume[];
+  results: CostumeResponseObject[];
 }
 
 export const initialState: GroupSearchState = {

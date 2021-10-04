@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CostumeResponse } from 'src/app/models/costume-response.model';
+import { CostumeResponseObject } from 'src/app/models/costume-response.model';
 
 export const loadGroupCostumes = createAction(
   '[Group Search] Load Group Costumes',
@@ -8,7 +8,7 @@ export const loadGroupCostumes = createAction(
 
 export const loadGroupCostumesSuccess = createAction(
   '[Group Search] Load Group Costumes Success',
-  props<{response: CostumeResponse}>()
+  props<{response: CostumeResponseObject[]}>()
 );
 
 export const loadGroupCostumesError = createAction(

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/state/appState';
 import { clearGroupCostumesSearch, loadGroupCostumes } from 'src/state/groupsearch.actions';
-import { CostumeResponse } from '../models/costume-response.model';
+import { CostumeResponseObject } from '../models/costume-response.model';
 
 @Component({
   selector: 'app-group-search',
@@ -19,7 +19,7 @@ export class GroupSearchComponent implements OnDestroy {
 
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
-  results$: Observable<CostumeResponse>;
+  results$: Observable<CostumeResponseObject[]>;
   error$: Observable<string | null>;
 
   constructor(private store: Store<AppState>, private fb: FormBuilder) {

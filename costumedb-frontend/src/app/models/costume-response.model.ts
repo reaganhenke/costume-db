@@ -1,3 +1,5 @@
-import { Costume } from "./costume.model";
-
-export type CostumeResponse = Costume[];
+export type CostumeResponseObject = {
+  name: string;
+  imageUrl: string;
+  description: string;
+};
