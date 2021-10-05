@@ -1,1 +1,104 @@
-<p>group-search works!</p>
+<h2>group search</h2> 
+<ng-container *ngIf="!(loaded$ | async) && !(loading$ | async)">
+  <div *ngIf="!groupSize">
+    <div class="content-wrapper">
+      <p>Let's find your group the perfect costume.</p>
+      <p>First, how many people are in your group? 
+        <span class="input-wrapper">
+          <input type="number" name="quantity" min="1" max="9" (keyup.enter)="next()" [ngClass]="(!groupSizeForm.valid && groupSizeForm.dirty) ? 'error' : ''" [formControl]="groupSizeForm">
+          <div *ngIf="!groupSizeForm.valid && groupSizeForm.dirty" class="error-msg">must be 1-9</div>
+        </span>
+      </p>
+      <button (click)="next()" [disabled]="!groupSizeForm.valid" class="next">next</button>
+    </div>
+  </div>
+  <div *ngIf="groupSize" class="groupforms">
+    <p>Now tell us about the costumes you're looking for!</p>
+    <div *ngFor="let costume of group; let i = index" class="costume-form" id="costume-{{i}}">
+      <h3>costume {{i + 1}}</h3>
+      <button (click)="removeCostume(i)" class="close"><img alt="close" src="../../assets/close.svg"></button>
+
+      <span class="form-body">
+        <img src="../../assets/ghost.svg" alt="ghost">
+
+        <form [formGroup]="costume">
+          <span class="basics">
+            <label for="gender-{{i}}">Gender: </label>
+            <select id="gender-{{i}}" formControlName="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="">Any</option>
+            </select>
+            <label for="hair-{{i}}">Hair Color: </label>
+            <select id="hair-{{i}}" formControlName="hair">
+              <option value="blone">Blonde</option>
+              <option value="black">Black</option>
+              <option value="brown">Brown</option>
+              <option value="">Any</option>
+            </select>  
+          </span>
+          
+          <span class="advancedToggle">
+            <input type="checkbox" id="hair-{{i}}" formControlName="showAdvanced">  
+            <span></span><label for="hair-{{i}}">show advanced</label>
+          </span>
+
+          <div *ngIf="costume.get('showAdvanced')?.value" class="advanced">
+            <label for="body-{{i}}">body type: </label>
+            <select id="body-{{i}}" formControlName="bodyType">
+              <option value="">Any</option>
+            </select>
+
+            <label for="ethnicity-{{i}}">ethnicity: </label>
+            <select id="ethnicity-{{i}}" formControlName="ethnicity">
+              <option value="">Any</option>
+            </select>
+          </div>
+
+        </form>
+      </span>
+
+    </div>
+    <button (click)="addCostume()" class="add">add another <img alt="" src="../../assets/plus.svg"></button>
+    <span class="button-wrapper">
+      <button (click)="reset()" class="reset">reset</button>
+      <button (click)="submit()">submit</button>
+    </span>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="(loading$ | async)">
+  LOADING . . .
+</ng-container>
+
+<div class="loaded-wrapper" *ngIf="(loaded$ | async)">
+  <ng-container *ngIf="!(error$ | async); else error">
+    <span *ngIf="results$ | async as results">
+      <span *ngIf="results.length > 0; else noresults">
+        <p>We've found the following costumes for you: </p>
+        <div class="results-wrapper">
+          <div *ngFor="let costume of results" class="costume-result">
+            <h3>{{costume.name}}</h3>
+            <img src="{{costume.imageUrl}}">
+            <p>{{costume.description}}</p>
+          </div>
+        </div>
+        <p>Missing something? Help us out by <a href="share">submitting your own costume ideas</a>!</p>
+      </span>
+    </span>
+  </ng-container>
+  <button (click)="retry()" class="retry">retry</button>
+</div>
+
+<ng-template #error>
+  <p>Uh oh! We were unable to search our database. Try again later!</p>
+  <p>If this keeps happening, give us a heads up by <a href="feedback">submitting a bug report</a>.</p>
+</ng-template>
+
+<ng-template #noresults>
+  <p>
+    Uh oh! We didn't find any costumes for your group, but we're adding new ones 
+    all the time. Help us out by <a href="share">submitting your costume ideas</a>,
+    or try being less specific with your search and trying again!
+  </p>
+</ng-template>

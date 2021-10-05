@@ -7,14 +7,13 @@ footer {
   font-size: 0.8rem;
 }
 
-button {
+a {
   font: inherit;
-  background: none;
-  border: none;
+  text-align: center;
   color: rgba(255, 255, 255, 0.75);
-  cursor: pointer;
   transition: all 0.2s;
-  &:hover {
+  text-decoration: none;
+  &:hover, &:focus {
     color: rgba(255, 255, 255, 0.5);
   }
 }
