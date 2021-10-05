@@ -1,7 +1,7 @@
 
 <nav [ngClass]="{'showMobile': mobileMenu}">
   <a class="tab" routerLinkActive="active" routerLink="/groupsearch">Search Your Group</a>
-  <div class="tab" id="theme" tabindex="0" routerLinkActive="active" routerLink="/theme">
+  <div class="tab" id="theme" tabindex="0" routerLinkActive="active">
     <span (click)="toggleTheme()"> Costumes By Theme
       <button class="expand">
         <img *ngIf="expandThemes" src="../../assets/up.svg" alt="collapse themes menu">
@@ -9,9 +9,9 @@
       </button>
     </span>
     <ul id="theme-dropdown" aria-hidden="!expandThemes" [ngClass]="{'show': expandThemes}">
-      <li><a href="/theme/food">Food and Drink</a></li>
-      <li><a href="/theme/tv">Television</a></li>
-      <li><a href="/theme/scary">Scary</a></li>
+      <li><a routerLink="/theme/food">Food and Drink</a></li>
+      <li><a routerLink="/theme/tv">Television</a></li>
+      <li><a routerLink="/theme/scary">Scary</a></li>
     </ul>
   </div>
   <a class="tab" routerLinkActive="active" routerLink="/share">Share a Costume</a>
