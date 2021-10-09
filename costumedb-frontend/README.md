@@ -34,4 +34,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [ ] loading icon
 - [ ] share costume form
 - [ ] search results page
-- [ ] create a shared component for displaying costume results
+- [ ] create a shared component for displaying costume results - include a link to fandom or wherever the image was sourced
+- [ ] add google analytics
+- [ ] add privacy policy
+- [ ] add terms of use
+- [ ] fill out credits
