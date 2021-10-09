@@ -2,7 +2,7 @@ $orange: #BC6C25;
 
 nav {
   color: white;
-  box-shadow: 0px 1px 4px 1px rgb(0 0 0 / 23%);
+  box-shadow: 0px 4px 4px 1px rgb(0 0 0 / 23%);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -129,6 +129,11 @@ nav {
 
 @media only screen and (max-width: 475px) {
   .mobile-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 10;
     display: block;
     background-color: white;
     box-shadow: 0px 1px 4px 1px rgb(0 0 0 / 23%);
@@ -145,6 +150,7 @@ nav {
     background: none;
     height: 40px;
     width: 40px;
+    z-index: 100;
     img {
       height: 100%;
       width: 100%;
@@ -160,8 +166,10 @@ nav {
     top: 0;
     padding-top: 1rem;
     font-size: 18px;
+    z-index: 50;
     &.showMobile {
       display: flex;
+      margin-top: 45px;
     }
   }
 
