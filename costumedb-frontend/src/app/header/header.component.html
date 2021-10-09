@@ -28,6 +28,7 @@
 <div class="mobile-wrapper">
   <button id="toggleMobileMenu" (click)="toggleMobileMenu()">
     <img *ngIf="!mobileMenu" src="../../assets/show.svg" alt="show menu">
-    <img *ngIf="mobileMenu" src="../../assets/close.svg" alt="hide menu">
+    <img *ngIf="mobileMenu" src="../../assets/mobileclose.svg" alt="hide menu">
   </button>
 </div>
+<div class="mobile-overlay" *ngIf="mobileMenu" (click)="toggleMobileMenu()"></div>

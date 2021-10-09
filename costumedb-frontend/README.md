@@ -35,12 +35,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] create a shared component for displaying costume results
 - [x] add a link to fandom or wherever the image was sourced in costume tile
 - [x] make share costume form
+- [x] better mobile responsiveness - opening the menu should freeze scroll and cliking off it should close it. should reset whenever closed. 
+- [x] prevent dropdown part of themes menu from staying open on scroll
 
-- [ ] better mobile responsiveness - opening the menu should freeze scroll and cliking off it should close it. should reset whenever closed. 
 - [ ] loading icon
 - [ ] add google analytics
 - [ ] add privacy policy
 - [ ] add terms of use
 - [ ] fill out credits
 - [ ] add caching for theme results
-- [ ] prevent dropdown part of themes menu from staying open on scroll
