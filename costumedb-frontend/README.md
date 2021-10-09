@@ -25,3 +25,13 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## TODO
+- [x] read parameter on theme page
+
+- [ ] better mobile responsiveness - opening the menu should freeze scroll and cliking off it should close it. should reset whenever closed. 
+- [ ] loading icon
+- [ ] share costume form
+- [ ] search results page
+- [ ] create a shared component for displaying costume results
