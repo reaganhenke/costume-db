@@ -6,21 +6,26 @@ export interface TextSearchState {
   loading: boolean;
   loaded: boolean;
   error: string | null;
-  results: CostumeResponseObject[];}
+  results: CostumeResponseObject[];
+  searchText: string;
+}
 
 export const initialState: TextSearchState = {
   loading: false,
   loaded: false,
   error: null,
-  results: []};
+  results: [],
+  searchText: ''
+};
 
 const textSearchReducer = createReducer(
   initialState,
-  on(TextSearchActions.loadTextSearch, state => ({
+  on(TextSearchActions.loadTextSearch, (state, { request }) => ({
     ...state,
     loading: true,
     loaded: false,
-    results: []
+    results: [],
+    searchText: request
   })),
   on(TextSearchActions.loadTextSearchSuccess, (state, { response }) => ({
     ...state,

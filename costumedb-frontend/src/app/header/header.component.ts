@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/state/appState';
+import { loadTextSearch } from 'src/state/text-search/text-search.actions';
 
 @Component({
   selector: 'app-header',
@@ -12,12 +15,13 @@ export class HeaderComponent implements OnInit {
   mobileMenu = false;
   expandThemes = false;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {}
 
   submitSearch() {
-    console.log(this.search.value);
+    let value = (this.search.value).replace(/[^A-Za-z ]/g, '');
+    this.store.dispatch(loadTextSearch({request: value}));
   }
 
   toggleMobileMenu() {

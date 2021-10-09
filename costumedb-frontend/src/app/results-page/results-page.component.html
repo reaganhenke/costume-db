@@ -1,0 +1,26 @@
+<h2>results for "{{searchText$ | async}}"</h2> 
+
+<ng-container *ngIf="(loading$ | async)">
+  LOADING . . .
+</ng-container>
+
+<div class="loaded-wrapper" *ngIf="(loaded$ | async)">
+  <ng-container *ngIf="!(error$ | async); else error">
+    <span *ngIf="results$ | async as results">
+      <span *ngIf="results.length > 0; else error">
+        <div class="results-wrapper">
+          <div *ngFor="let costume of results" class="costume-result">
+            <h3>{{costume.name}}</h3>
+            <img src="{{costume.imageUrl}}">
+            <p>{{costume.description}}</p>
+          </div>
+        </div>
+      </span>
+    </span>
+  </ng-container>
+</div>
+
+<ng-template #error>
+  <p>We're having some trouble with our database right now.</p>
+  <p>If this keeps happening, give us a heads up by <a href="feedback">submitting a bug report</a>.</p>
+</ng-template>

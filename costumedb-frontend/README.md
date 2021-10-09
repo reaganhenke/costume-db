@@ -29,13 +29,15 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## TODO
 - [x] read parameter on theme page
+- [x] create text search results page
+- [x] sanitize search
 
 - [ ] better mobile responsiveness - opening the menu should freeze scroll and cliking off it should close it. should reset whenever closed. 
 - [ ] loading icon
-- [ ] share costume form
-- [ ] search results page
+- [ ] make share costume form
 - [ ] create a shared component for displaying costume results - include a link to fandom or wherever the image was sourced
 - [ ] add google analytics
 - [ ] add privacy policy
 - [ ] add terms of use
 - [ ] fill out credits
+- [ ] create service for text search and theme search

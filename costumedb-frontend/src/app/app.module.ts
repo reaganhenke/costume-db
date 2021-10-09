@@ -24,6 +24,7 @@ import { FeedbackComponent } from './footer-pages/feedback/feedback.component';
 import { TermsofuseComponent } from './footer-pages/termsofuse/termsofuse.component';
 import { TextSearchEffects } from 'src/state/text-search/text-search.effects';
 import { ThemeSearchEffects } from 'src/state/theme-search/theme-search.effects';
+import { ResultsPageComponent } from './results-page/results-page.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ThemeSearchEffects } from 'src/state/theme-search/theme-search.effects'
     CreditComponent,
     FeedbackComponent,
     TermsofuseComponent,
+    ResultsPageComponent,
   ],
   imports: [
     HttpClientModule,

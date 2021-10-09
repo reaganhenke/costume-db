@@ -17,7 +17,7 @@
   <a class="tab" routerLinkActive="active" routerLink="/share">Share a Costume</a>
 
   <div id="search">
-    <input (keyup.enter)="submitSearch()" type="text" [formControl]="search">
+    <input (keyup.enter)="submitSearch()" type="text" [formControl]="search" maxlength="20">
     <span class="underline" [ngClass]="{'forceunderline': search.value.length}"></span>
     <button (click)="submitSearch()" type="submit" aria-label="search">
       <img src="../../assets/magnifying.svg" alt="">
