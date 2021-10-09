@@ -17,7 +17,6 @@ import { reducer as themeSearchReducer } from 'src/state/theme-search/theme-sear
 import { reducer as textSearchReducer } from 'src/state/text-search/text-search.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { GroupSearchEffects } from 'src/state/group-search/group-search.effects';
-import { GroupSearchService } from './group-search/group-search.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CreditComponent } from './footer-pages/credit/credit.component';
 import { FeedbackComponent } from './footer-pages/feedback/feedback.component';
@@ -57,7 +56,6 @@ import { ResultsPageComponent } from './results-page/results-page.component';
     ]),
     extModules,
   ],
-  providers: [GroupSearchService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -31,6 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] read parameter on theme page
 - [x] create text search results page
 - [x] sanitize search
+- [x] create shared service for text search and theme search
 
 - [ ] better mobile responsiveness - opening the menu should freeze scroll and cliking off it should close it. should reset whenever closed. 
 - [ ] loading icon
@@ -40,4 +41,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [ ] add privacy policy
 - [ ] add terms of use
 - [ ] fill out credits
-- [ ] create service for text search and theme search
+- [ ] add caching for theme results
