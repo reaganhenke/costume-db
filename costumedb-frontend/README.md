@@ -37,6 +37,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] make share costume form
 - [x] better mobile responsiveness - opening the menu should freeze scroll and cliking off it should close it. should reset whenever closed. 
 - [x] prevent dropdown part of themes menu from staying open on scroll
+- [x] update mock data to match model
 
 - [ ] loading icon
 - [ ] add google analytics
@@ -47,4 +48,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [ ] flesh out text on homepage
 - [ ] update themes to be correct
 - [ ] loading for iframes?
+- [ ] source database images
 
