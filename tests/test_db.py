@@ -36,10 +36,10 @@ def build_test_db():
     connection.close()
 
 def test_number_of_entries():
-    # A quick way to get the number of rows in a table
     build_test_db()
     connection = sqlite3.connect("tests/test-costumes.db")
     cursor = connection.cursor()
+    # A quick way to get the number of rows in a table
     costume_count = cursor.execute("SELECT COUNT(*) FROM individuals").fetchone()[0]
     connection.close()
 
