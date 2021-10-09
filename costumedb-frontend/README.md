@@ -34,10 +34,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] create shared service for text search and theme search
 - [x] create a shared component for displaying costume results
 - [x] add a link to fandom or wherever the image was sourced in costume tile
+- [x] make share costume form
 
 - [ ] better mobile responsiveness - opening the menu should freeze scroll and cliking off it should close it. should reset whenever closed. 
 - [ ] loading icon
-- [ ] make share costume form
 - [ ] add google analytics
 - [ ] add privacy policy
 - [ ] add terms of use
