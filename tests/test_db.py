@@ -14,11 +14,23 @@ def build_test_db():
 
     connection = sqlite3.connect("tests/test-costumes.db")
     cursor = connection.cursor()
-    cursor.execute("CREATE TABLE costumes (name TEXT, group_name TEXT, member_count INTEGER, gender TEXT, hair_color TEXT)")
-    cursor.execute("INSERT INTO costumes VALUES ('Salt', 'Salt and Pepper', 2, 'NONE', 'NONE')")
-    cursor.execute("INSERT INTO costumes VALUES ('Pepper', 'Salt and Pepper', 2, 'NONE', 'NONE')")
-    cursor.execute("INSERT INTO costumes VALUES ('Chandler Bing', 'Chandler & Monica', 2, 'MALE', 'BROWN')")
-    cursor.execute("INSERT INTO costumes VALUES ('Monica Geller', 'Chandler & Monica', 2, 'FEMALE', 'BROWN')")
+    cursor.execute("CREATE TABLE individuals (name TEXT, gender TEXT, hair_color TEXT)")
+    cursor.execute("INSERT INTO individuals VALUES ('Salt', 'NONE', 'NONE')")
+    cursor.execute("INSERT INTO individuals VALUES ('Pepper', 'NONE', 'NONE')")
+    cursor.execute("INSERT INTO individuals VALUES ('Chandler Bing', 'MALE', 'BROWN')")
+    cursor.execute("INSERT INTO individuals VALUES ('Monica Geller', 'FEMALE', 'BROWN')")
+
+    cursor.execute("CREATE TABLE groups (name TEXT, group_size INTEGER)")
+    cursor.execute("INSERT INTO groups VALUES ('Salt and Pepper', 2)")
+    cursor.execute("INSERT INTO groups VALUES ('Monica and Chandler', 2)")
+
+    # Group is a keyword in sqlite3, use group_name instead
+    cursor.execute("CREATE TABLE individuals_groups (individual TEXT, group_name TEXT)")
+    cursor.execute("INSERT INTO individuals_groups VALUES ('Salt', 'Salt and Pepper')")
+    cursor.execute("INSERT INTO individuals_groups VALUES ('Pepper', 'Salt and Pepper')")
+    cursor.execute("INSERT INTO individuals_groups VALUES ('Monica Geller', 'Monica and Chandler')")
+    cursor.execute("INSERT INTO individuals_groups VALUES ('Chandler Bing', 'Monica and Chandler')")
+
 
     connection.commit()
     connection.close()
@@ -28,7 +40,7 @@ def test_number_of_entries():
     build_test_db()
     connection = sqlite3.connect("tests/test-costumes.db")
     cursor = connection.cursor()
-    costume_count = cursor.execute("SELECT COUNT(*) FROM costumes").fetchone()[0]
+    costume_count = cursor.execute("SELECT COUNT(*) FROM individuals").fetchone()[0]
     connection.close()
 
     assert costume_count == 4

@@ -31,9 +31,9 @@ def is_costume_a_match(members, query):
     is_good_match = True
     for person_index, person in enumerate(query['people']):
         member_removed = False
-        for member_index, member in enumerate(members):
+        for member_index, member in enumerate(members['members']):
             if gender_match(person, member) and hair_color_match(person, member):
-                members.pop(member_index)
+                members['members'].pop(member_index)
                 member_removed = True
                 break
 
@@ -62,28 +62,55 @@ def search(query):
     cursor = connection.cursor()
 
     # Use member count to grab all items in main db that match value
-    cursor.execute("SELECT * FROM costumes WHERE member_count=?", "2")
-    costumes = cursor.fetchall()
+    cursor.execute("SELECT * FROM groups WHERE group_size=?", (query['number_of_people'],))
+    costume_groups = cursor.fetchall()
 
     # ('Salt', 'Salt and Pepper', 2, 'NONE', 'NONE')
     # ('Pepper', 'Salt and Pepper', 2, 'NONE', 'NONE')
 
     # Create groupings
-    costume_groups = {}
-    for costume in costumes:
-        if costume[1] not in costume_groups:
-            costume_groups[costume[1]] = []
-        costume_groups[costume[1]].append({
-            'name': costume[0],
-            'gender': costume[3],
-            'hair_color': costume[4]
-        })
+    costume_groups_with_members = {}
+    for group in costume_groups:
+        # group = ('Salt and Pepper', 2)
+        # This is a list of individuals that belong to a certain group
+        cursor.execute("SELECT * from individuals_groups WHERE group_name=?", (group[0],))
+        members = cursor.fetchall()
+        costume_groups_with_members[group[0]] = {
+            'group_size': query['number_of_people'],
+            'members': []
+        }
+
+        # member = ('Salt', 'Salt and Pepper')
+        for member in members:
+            cursor.execute("SELECT * from individuals WHERE name=?", (member[0],))
+            individual = cursor.fetchall()[0]
+            #print(individual)
+            costume_groups_with_members[group[0]]['members'].append({
+                'name': individual[0],
+                'gender': individual[1],
+                'hair_color': individual[2]
+            })
+
+# {'Monica and Chandler': {'group_size': 2,
+#                          'members': [{'gender': 'FEMALE',
+#                                       'hair_color': 'BROWN',
+#                                       'name': 'Monica Geller'},
+#                                      {'gender': 'MALE',
+#                                       'hair_color': 'BROWN',
+#                                       'name': 'Chandler Bing'}]},
+#  'Salt and Pepper': {'group_size': 2,
+#                      'members': [{'gender': 'NONE',
+#                                   'hair_color': 'NONE',
+#                                   'name': 'Salt'},
+#                                  {'gender': 'NONE',
+#                                   'hair_color': 'NONE',
+#                                   'name': 'Pepper'}]}}
 
     # For each grouping, apply the other data filters from the query - discard groupings that don't match
     matching_costumes = []
-    for costume, members in costume_groups.items():
+    for costume_name, members in costume_groups_with_members.items():
         if is_costume_a_match(members, query):
-            matching_costumes.append({costume: members})
+            matching_costumes.append({costume_name: members})
     
     return matching_costumes
 
