@@ -22,6 +22,7 @@ const themeSearchReducer = createReducer(
     ...state,
     loading: true,
     loaded: false,
+    error: null,
     results: []
   })),
   on(ThemeSearchActions.loadThemeSearchSuccess, (state, { response }) => ({

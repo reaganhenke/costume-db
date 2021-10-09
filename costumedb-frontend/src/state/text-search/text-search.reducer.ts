@@ -24,6 +24,7 @@ const textSearchReducer = createReducer(
     ...state,
     loading: true,
     loaded: false,
+    error: null,
     results: [],
     searchText: request
   })),

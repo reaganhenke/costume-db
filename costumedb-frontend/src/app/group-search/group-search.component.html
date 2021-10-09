@@ -70,11 +70,7 @@
       <span *ngIf="results.length > 0; else noresults">
         <p>We've found the following costumes for you: </p>
         <div class="results-wrapper">
-          <div *ngFor="let costume of results" class="costume-result">
-            <h3>{{costume.name}}</h3>
-            <img src="{{costume.imageUrl}}">
-            <p>{{costume.description}}</p>
-          </div>
+          <app-costume-tile *ngFor="let costume of results" [costume]="costume"></app-costume-tile>
         </div>
         <p>Missing something? Help us out by <a href="share">submitting your own costume ideas</a>!</p>
       </span>

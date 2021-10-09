@@ -7,15 +7,9 @@
 <div class="loaded-wrapper" *ngIf="(loaded$ | async)">
   <ng-container *ngIf="!(error$ | async); else error">
     <span *ngIf="results$ | async as results">
-      <span *ngIf="results.length > 0; else error">
-        <div class="results-wrapper">
-          <div *ngFor="let costume of results" class="costume-result">
-            <h3>{{costume.name}}</h3>
-            <img src="{{costume.imageUrl}}">
-            <p>{{costume.description}}</p>
-          </div>
-        </div>
-      </span>
+      <div class="results-wrapper" *ngIf="results.length > 0; else error">
+        <app-costume-tile *ngFor="let costume of results" [costume]="costume"></app-costume-tile>
+      </div>
     </span>
   </ng-container>
 </div>

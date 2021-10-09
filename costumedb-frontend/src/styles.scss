@@ -22,3 +22,16 @@ h2 {
   height: 100%;
   min-height: 200px;
 }
+
+.results-wrapper {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+@media only screen and (max-width: 475px) {
+  .results-wrapper {
+    flex-flow: column;
+  }
+}
