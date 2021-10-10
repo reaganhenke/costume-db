@@ -38,8 +38,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] better mobile responsiveness - opening the menu should freeze scroll and cliking off it should close it. should reset whenever closed. 
 - [x] prevent dropdown part of themes menu from staying open on scroll
 - [x] update mock data to match model
+- [x] loading icon
 
-- [ ] loading icon
 - [ ] add google analytics
 - [ ] add privacy policy
 - [ ] add terms of use
@@ -49,4 +49,3 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [ ] update themes to be correct
 - [ ] loading for iframes?
 - [ ] source database images
-

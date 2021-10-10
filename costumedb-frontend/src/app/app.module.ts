@@ -25,6 +25,7 @@ import { TextSearchEffects } from 'src/state/text-search/text-search.effects';
 import { ThemeSearchEffects } from 'src/state/theme-search/theme-search.effects';
 import { ResultsPageComponent } from './results-page/results-page.component';
 import { CostumeTileComponent } from './costume-tile/costume-tile.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CostumeTileComponent } from './costume-tile/costume-tile.component';
     TermsofuseComponent,
     ResultsPageComponent,
     CostumeTileComponent,
+    LoadingComponent,
   ],
   imports: [
     HttpClientModule,

@@ -61,7 +61,7 @@
 </ng-container>
 
 <ng-container *ngIf="(loading$ | async)">
-  LOADING . . .
+  <app-loading></app-loading>
 </ng-container>
 
 <div class="loaded-wrapper" *ngIf="(loaded$ | async)">
