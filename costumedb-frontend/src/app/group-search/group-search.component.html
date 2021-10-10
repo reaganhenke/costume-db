@@ -18,8 +18,7 @@
       <h3>costume {{i + 1}}</h3>
       <button (click)="removeCostume(i)" class="close"><img alt="close" src="../../assets/close.svg"></button>
 
-      <span class="form-body">
-        <img src="../../assets/ghost.svg" alt="ghost">
+        <img src="../../assets/ghost.svg" alt="ghost" class="ghost">
 
         <form [formGroup]="costume">
           <span class="basics">
@@ -38,25 +37,19 @@
             </select>  
           </span>
           
-          <span class="advancedToggle">
+          <!-- <span class="advancedToggle">
             <input type="checkbox" id="hair-{{i}}" formControlName="showAdvanced">  
             <span></span><label for="hair-{{i}}">show advanced</label>
-          </span>
+          </span> -->
 
-          <div *ngIf="costume.get('showAdvanced')?.value" class="advanced">
+          <!-- <div *ngIf="costume.get('showAdvanced')?.value" class="advanced">
             <label for="body-{{i}}">body type: </label>
             <select id="body-{{i}}" formControlName="bodyType">
               <option value="">Any</option>
             </select>
-
-            <label for="ethnicity-{{i}}">ethnicity: </label>
-            <select id="ethnicity-{{i}}" formControlName="ethnicity">
-              <option value="">Any</option>
-            </select>
-          </div>
+          </div> -->
 
         </form>
-      </span>
 
     </div>
     <button (click)="addCostume()" class="add">add another <img alt="" src="../../assets/plus.svg"></button>
@@ -77,11 +70,7 @@
       <span *ngIf="results.length > 0; else noresults">
         <p>We've found the following costumes for you: </p>
         <div class="results-wrapper">
-          <div *ngFor="let costume of results" class="costume-result">
-            <h3>{{costume.name}}</h3>
-            <img src="{{costume.imageUrl}}">
-            <p>{{costume.description}}</p>
-          </div>
+          <app-costume-tile *ngFor="let costume of results" [costume]="costume"></app-costume-tile>
         </div>
         <p>Missing something? Help us out by <a href="share">submitting your own costume ideas</a>!</p>
       </span>

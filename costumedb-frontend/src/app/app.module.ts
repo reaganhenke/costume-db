@@ -17,13 +17,14 @@ import { reducer as themeSearchReducer } from 'src/state/theme-search/theme-sear
 import { reducer as textSearchReducer } from 'src/state/text-search/text-search.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { GroupSearchEffects } from 'src/state/group-search/group-search.effects';
-import { GroupSearchService } from './group-search/group-search.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CreditComponent } from './footer-pages/credit/credit.component';
 import { FeedbackComponent } from './footer-pages/feedback/feedback.component';
 import { TermsofuseComponent } from './footer-pages/termsofuse/termsofuse.component';
 import { TextSearchEffects } from 'src/state/text-search/text-search.effects';
 import { ThemeSearchEffects } from 'src/state/theme-search/theme-search.effects';
+import { ResultsPageComponent } from './results-page/results-page.component';
+import { CostumeTileComponent } from './costume-tile/costume-tile.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,8 @@ import { ThemeSearchEffects } from 'src/state/theme-search/theme-search.effects'
     CreditComponent,
     FeedbackComponent,
     TermsofuseComponent,
+    ResultsPageComponent,
+    CostumeTileComponent,
   ],
   imports: [
     HttpClientModule,
@@ -55,7 +58,6 @@ import { ThemeSearchEffects } from 'src/state/theme-search/theme-search.effects'
     ]),
     extModules,
   ],
-  providers: [GroupSearchService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

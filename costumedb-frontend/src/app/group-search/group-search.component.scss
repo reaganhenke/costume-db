@@ -1,12 +1,5 @@
-$orange: #BC6C25;
+$orange: #bc6c25;
 $black: #373737;
-
-h3 {
-  margin: 0;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  font-family: "Averia Serif Libre";
-}
 
 .content-wrapper {
   display: flex;
@@ -89,10 +82,19 @@ a {
   opacity: 100;
 
   transition: all 0.2s;
-  
-  img {
+
+  form {
+    margin: 1.5rem auto;
+  }
+
+  .ghost {
+    position: absolute;
     width: 70px;
-    margin-right: 1rem;
+    bottom: 16px;
+  }
+
+  &:focus-within .ghost {
+    animation: float 0.8s infinite;
   }
 
   .close {
@@ -104,7 +106,7 @@ a {
     font-size: 1.2rem;
     cursor: pointer;
     margin: 0;
-    padding: 0;
+    padding: 0 3px;
 
     img {
       height: 12px;
@@ -119,6 +121,18 @@ a {
   }
 }
 
+@keyframes float {
+  0% {
+    bottom: 16px;
+  }
+  50% {
+    bottom: 20px;
+  }
+  100% {
+    bottom: 16px;
+  }
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 10%;
@@ -126,11 +140,6 @@ a {
   100% {
     opacity: 100%;
   }
-}
-
-.form-body {
-  display: flex;
-  align-items: flex-start;
 }
 
 select {
@@ -150,7 +159,8 @@ select {
   }
 }
 
-.basics, .advanced {
+.basics,
+.advanced {
   display: flex;
   align-items: center;
   label:not(:first-child) {
@@ -210,6 +220,7 @@ select {
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .add {
@@ -222,7 +233,8 @@ form {
     width: 14px;
     margin-left: 8px;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     opacity: 100%;
   }
 }
@@ -237,9 +249,13 @@ form {
   }
 }
 
-
 @media only screen and (max-width: 485px) {
-  .basics, .advanced {
+  .costume-form .ghost {
+    display: none;
+  }
+
+  .basics,
+  .advanced {
     flex-direction: column;
     label {
       margin: 8px 0 !important;
@@ -258,31 +274,5 @@ form {
 }
 
 .retry {
-  align-self: flex-end; 
-}
-
-.costume-result {
-  box-sizing: border-box;
-  background-color: white;
-  box-shadow: 0px 1px 4px 1px rgb(0 0 0 / 23%);
-  border-radius: 10px;
-  margin: 16px 8px;
-  padding: 2rem;
-  width: 384px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.results-wrapper {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: center;
-  margin: 16px 0;
-  img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    object-position: top;
-  }
+  align-self: flex-end;
 }

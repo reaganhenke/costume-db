@@ -1,19 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { SearchService } from 'src/app/search.service';
 import * as ThemeSearchActions from './theme-search.actions';
 
 @Injectable()
 export class ThemeSearchEffects {
-  loadGroupCostumes$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ThemeSearchActions.loadThemeSearch),
-        tap((action) =>
-          console.log('placeholder, search the database for the theme')
+  loadGroupCostumes$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ThemeSearchActions.loadThemeSearch),
+      switchMap((action) =>
+        this.searchService.loadCostumesByText(action.request).pipe(
+          map((response) =>
+            ThemeSearchActions.loadThemeSearchSuccess({ response })
+          ),
+          catchError((error) =>
+            of(ThemeSearchActions.loadThemeSearchError({ error }))
+          )
         )
-      ),
-    { dispatch: false }
+      )
+    )
   );
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private searchService: SearchService
+  ) {}
 }

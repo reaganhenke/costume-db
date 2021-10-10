@@ -9,15 +9,15 @@
       </button>
     </span>
     <ul id="theme-dropdown" aria-hidden="!expandThemes" [ngClass]="{'show': expandThemes}">
-      <li><a routerLink="/theme/food">Food and Drink</a></li>
-      <li><a routerLink="/theme/tv">Television</a></li>
-      <li><a routerLink="/theme/scary">Scary</a></li>
+      <li><a [routerLink]="['/theme', 'food']">Food and Drink</a></li>
+      <li><a [routerLink]="['/theme', 'tv']">Television</a></li>
+      <li><a [routerLink]="['/theme', 'scary']">Scary</a></li>
     </ul>
   </div>
   <a class="tab" routerLinkActive="active" routerLink="/share">Share a Costume</a>
 
   <div id="search">
-    <input (keyup.enter)="submitSearch()" type="text" [formControl]="search">
+    <input (keyup.enter)="submitSearch()" type="text" [formControl]="search" maxlength="20">
     <span class="underline" [ngClass]="{'forceunderline': search.value.length}"></span>
     <button (click)="submitSearch()" type="submit" aria-label="search">
       <img src="../../assets/magnifying.svg" alt="">
@@ -28,6 +28,7 @@
 <div class="mobile-wrapper">
   <button id="toggleMobileMenu" (click)="toggleMobileMenu()">
     <img *ngIf="!mobileMenu" src="../../assets/show.svg" alt="show menu">
-    <img *ngIf="mobileMenu" src="../../assets/close.svg" alt="hide menu">
+    <img *ngIf="mobileMenu" src="../../assets/mobileclose.svg" alt="hide menu">
   </button>
 </div>
+<div class="mobile-overlay" *ngIf="mobileMenu" (click)="toggleMobileMenu()"></div>
