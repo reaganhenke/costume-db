@@ -9,9 +9,9 @@
       </button>
     </span>
     <ul id="theme-dropdown" aria-hidden="!expandThemes" [ngClass]="{'show': expandThemes}">
-      <li><a [routerLink]="['/theme', 'food']">Food and Drink</a></li>
-      <li><a [routerLink]="['/theme', 'tv']">Television</a></li>
-      <li><a [routerLink]="['/theme', 'scary']">Scary</a></li>
+      <li *ngFor="let theme of themes">
+        <a [routerLink]="['/theme',theme[1]]">{{theme[0]}}</a>
+      </li>
     </ul>
   </div>
   <a class="tab" routerLinkActive="active" routerLink="/share">Share a Costume</a>
