@@ -40,6 +40,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] update mock data to match model
 - [x] loading icon
 - [x] add loading for iframes
+- [x] add "not found" illustration
 
 - [ ] add google analytics
 - [ ] add privacy policy

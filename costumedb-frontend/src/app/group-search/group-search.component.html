@@ -85,9 +85,13 @@
 </ng-template>
 
 <ng-template #noresults>
-  <p>
-    Uh oh! We didn't find any costumes for your group, but we're adding new ones 
-    all the time. Help us out by <a href="share">submitting your costume ideas</a>,
-    or try being less specific with your search and trying again!
-  </p>
+  <div class="notfound-wrapper">
+    <img src="assets/not_found.svg" alt class="notfound">
+    <p>
+      Uh oh! We didn't find any costumes for your group, but we're adding new ones 
+      all the time.
+      <br>
+      Help us out by <a href="share">submitting your costume ideas</a>.
+    </p>
+  </div>
 </ng-template>

@@ -7,7 +7,7 @@
 <div class="loaded-wrapper" *ngIf="(loaded$ | async)">
   <ng-container *ngIf="!(error$ | async); else error">
     <span *ngIf="results$ | async as results">
-      <div class="results-wrapper" *ngIf="results.length > 0; else error">
+      <div class="results-wrapper" *ngIf="results.length > 0; else noresults">
         <app-costume-tile *ngFor="let costume of results" [costume]="costume"></app-costume-tile>
       </div>
     </span>
@@ -17,4 +17,16 @@
 <ng-template #error>
   <p>We're having some trouble with our database right now.</p>
   <p>If this keeps happening, give us a heads up by <a href="feedback">submitting a bug report</a>.</p>
+</ng-template>
+
+<ng-template #noresults>
+  <div class="notfound-wrapper">
+    <img src="assets/not_found.svg" alt class="notfound">
+    <p>
+      Uh oh! We didn't find any costumes for your search, but we're adding new ones 
+      all the time.
+      <br>
+      Help us out by <a href="share">submitting your costume ideas</a>.
+    </p>
+  </div>
 </ng-template>
