@@ -1,6 +1,7 @@
 <div class="costume-result">
   <h3>{{costume.name}}</h3>
+  <p class="origin" *ngIf="costume.origin"><i>from {{costume.origin}}</i></p>
   <img src="{{costume.imageUrl}}" alt="">
-  <p class="subtext">see more at <a target="_blank" href={{costume.imageSource}}>fandom</a></p>
+  <p class="subtext" *ngIf="costume.fandomLink">see more at <a target="_blank" href={{costume.fandomLink}}>fandom</a></p>
   <p>{{costume.description}}</p>
 </div>

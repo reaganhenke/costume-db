@@ -1,6 +1,7 @@
 export type CostumeResponseObject = {
   name: string;
+  origin?: string;
   imageUrl: string;
-  imageSource: string;
+  fandomLink?: string;
   description: string;
 };
