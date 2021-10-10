@@ -39,6 +39,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] prevent dropdown part of themes menu from staying open on scroll
 - [x] update mock data to match model
 - [x] loading icon
+- [x] add loading for iframes
 
 - [ ] add google analytics
 - [ ] add privacy policy
@@ -47,5 +48,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [ ] add caching for theme results
 - [ ] flesh out text on homepage
 - [ ] update themes to be correct
-- [ ] loading for iframes?
 - [ ] source database images
