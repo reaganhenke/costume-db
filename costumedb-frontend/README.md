@@ -42,12 +42,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] add loading for iframes
 - [x] add "not found" illustration
 - [x] add origin to costume tiles
+- [x] add caching for theme results
 
 - [ ] add google analytics
 - [ ] add privacy policy
 - [ ] add terms of use
 - [ ] fill out credits
-- [ ] add caching for theme results
 - [ ] flesh out text on homepage
 - [ ] update themes to be correct
 - [ ] source database images
