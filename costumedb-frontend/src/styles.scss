@@ -38,6 +38,18 @@ h3 {
   margin: 16px 0;
 }
 
+.notfound-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0;
+  p {
+    text-align: center;
+  }
+  img {
+    height: 300px;
+  }
+}
+
 @media only screen and (max-width: 475px) {
   .results-wrapper {
     flex-flow: column;

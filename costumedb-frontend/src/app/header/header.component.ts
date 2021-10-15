@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/state/appState';
 import { loadTextSearch } from 'src/state/text-search/text-search.actions';
+import { themes } from '../themes';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class HeaderComponent implements OnInit {
   search = new FormControl('');
   mobileMenu = false;
   expandThemes = false;
+  themes = themes;
 
   constructor(private store: Store<AppState>, private router: Router,  private cdr: ChangeDetectorRef) {
     this.router.events.subscribe(() => {

@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'privacy', component: PrivacyPolicyComponent },
   { path: 'credit', component: CreditComponent },
   { path: 'feedback', component: FeedbackComponent },
-  { path: 'terms', component: TermsofuseComponent }
+  { path: 'terms', component: TermsofuseComponent },
+  { path: '**', redirectTo: 'groupsearch' }
 ];
 
 @NgModule({

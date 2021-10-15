@@ -1,3 +1,4 @@
-<div class="form-wrapper">
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe5CY-ypt64-uWegRDDJ2MmDsXM-5fXPGPa3P1aml1jKc4PuQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<app-loading *ngIf="isLoading"></app-loading>
+<div class="form-wrapper" [class.hide]="isLoading">
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe5CY-ypt64-uWegRDDJ2MmDsXM-5fXPGPa3P1aml1jKc4PuQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0" (load)="isLoading=false"></iframe>
 </div>

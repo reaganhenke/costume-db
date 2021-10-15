@@ -10,7 +10,6 @@ export class CostumeTileComponent {
   @Input() costume: CostumeResponseObject = {
     name: '',
     imageUrl: '',
-    imageSource: '',
     description: ''
   };
 

@@ -6,36 +6,40 @@ export interface ThemeSearchState {
   loading: boolean;
   loaded: boolean;
   error: string | null;
-  results: CostumeResponseObject[];
+  theme: string;
+  results: Map<string, CostumeResponseObject[]>;
 }
 
 export const initialState: ThemeSearchState = {
   loading: false,
   loaded: false,
   error: null,
-  results: []
+  theme: '',
+  results: new Map()
 };
 
 const themeSearchReducer = createReducer(
   initialState,
-  on(ThemeSearchActions.loadThemeSearch, state => ({
+  on(ThemeSearchActions.loadThemeSearch, (state, { request }) => (
+    {
     ...state,
     loading: true,
     loaded: false,
     error: null,
-    results: []
+    theme: request
   })),
   on(ThemeSearchActions.loadThemeSearchSuccess, (state, { response }) => ({
     ...state,
     loading: false,
     loaded: true,
-    results: response
+    results: new Map([...Array.from(state.results.entries()), [state.theme, response]])
   })),
   on(ThemeSearchActions.loadThemeSearchError, (state, { error }) => ({
     ...state,
     loading: false,
     loaded: true,
-    error: error
+    error: error,
+    theme: ''
   }))
 );
 

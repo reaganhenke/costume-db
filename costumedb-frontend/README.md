@@ -26,6 +26,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+## Deploy
+
+The site is deployed with Github Pages and uses [Angular CLI GithubPages](https://www.npmjs.com/package/angular-cli-ghpages). To deploy, run `ng deploy --base-href=/costume-db/` from the frontend branch.
+
+This will create an auto generated commit in the gh-pages branch and will be live automatically.
 
 ## TODO
 - [x] read parameter on theme page
@@ -38,15 +43,22 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] better mobile responsiveness - opening the menu should freeze scroll and cliking off it should close it. should reset whenever closed. 
 - [x] prevent dropdown part of themes menu from staying open on scroll
 - [x] update mock data to match model
+- [x] loading icon
+- [x] add loading for iframes
+- [x] add "not found" illustration
+- [x] add origin to costume tiles
+- [x] add caching for theme results
+- [x] flesh out text on homepage
+- [x] set up deploy with github pages
+- [x] buy domain
+- [x] add name field
+- [x] rename hair field
 
-- [ ] loading icon
 - [ ] add google analytics
 - [ ] add privacy policy
 - [ ] add terms of use
 - [ ] fill out credits
-- [ ] add caching for theme results
-- [ ] flesh out text on homepage
 - [ ] update themes to be correct
-- [ ] loading for iframes?
 - [ ] source database images
-
+- [ ] fix web manifest
+- [ ] reduce scss size for group search and header
