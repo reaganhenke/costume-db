@@ -14,7 +14,7 @@ import { CostumeResponseObject } from '../models/costume-response.model';
 })
 export class GroupSearchComponent implements OnDestroy {
   groupSize = 0;
-  groupSizeForm = new FormControl('', [Validators.required, Validators.max(9), Validators.min(1)]);
+  groupSizeForm = new FormControl('', [Validators.required, Validators.max(9), Validators.min(2)]);
   group: FormGroup [] = [];
   removing = false;
 

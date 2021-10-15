@@ -43,11 +43,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] add "not found" illustration
 - [x] add origin to costume tiles
 - [x] add caching for theme results
+- [x] flesh out text on homepage
 
 - [ ] add google analytics
 - [ ] add privacy policy
 - [ ] add terms of use
 - [ ] fill out credits
-- [ ] flesh out text on homepage
 - [ ] update themes to be correct
 - [ ] source database images

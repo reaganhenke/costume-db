@@ -2,11 +2,13 @@
 <ng-container *ngIf="!(loaded$ | async) && !(loading$ | async)">
   <div *ngIf="!groupSize">
     <div class="content-wrapper">
-      <p>Let's find your group the perfect costume.</p>
+      <p>Finding the right group costume can be tricky. Luckily, we're here to help.<br>
+        You can search our database for group costumes of all sizes, and even filter for certain hair colors!<br>
+        Let's find your group the perfect costume.</p>
       <p>First, how many people are in your group? 
         <span class="input-wrapper">
-          <input type="number" name="quantity" min="1" max="9" (keyup.enter)="next()" [ngClass]="(!groupSizeForm.valid && groupSizeForm.dirty) ? 'error' : ''" [formControl]="groupSizeForm">
-          <div *ngIf="!groupSizeForm.valid && groupSizeForm.dirty" class="error-msg">must be 1-9</div>
+          <input type="number" name="quantity" min="2" max="9" (keyup.enter)="next()" [ngClass]="(!groupSizeForm.valid && groupSizeForm.dirty) ? 'error' : ''" [formControl]="groupSizeForm">
+          <div *ngIf="!groupSizeForm.valid && groupSizeForm.dirty" class="error-msg">must be 2-9</div>
         </span>
       </p>
       <button (click)="next()" [disabled]="!groupSizeForm.valid" class="next">next</button>
@@ -16,7 +18,7 @@
     <p>Now tell us about the costumes you're looking for!</p>
     <div *ngFor="let costume of group; let i = index" class="costume-form" id="costume-{{i}}">
       <h3>costume {{i + 1}}</h3>
-      <button (click)="removeCostume(i)" class="close"><img alt="close" src="../../assets/close.svg"></button>
+      <button *ngIf="group.length > 2" (click)="removeCostume(i)" class="close"><img alt="close" src="../../assets/close.svg"></button>
 
         <img src="../../assets/ghost.svg" alt="ghost" class="ghost">
 
