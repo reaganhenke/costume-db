@@ -2,7 +2,7 @@
 import sqlite3
 import sys
 sys.path.insert(0, '/home/stephen/projects/costume-db')
-from server.app import search
+from server.app import search, get_groups_with_tag
 import os
 from server.individual import Individual
 
@@ -33,6 +33,10 @@ def build_test_db():
     cursor.execute("INSERT INTO individuals_groups VALUES ('Monica Geller', 'Monica and Chandler')")
     cursor.execute("INSERT INTO individuals_groups VALUES ('Chandler Bing', 'Monica and Chandler')")
 
+    cursor.execute("CREATE TABLE group_tags (group_name TEXT, tag TEXT)")
+    cursor.execute("INSERT INTO group_tags VALUES ('Salt and Pepper', 'Classic')")
+    cursor.execute("INSERT INTO group_tags VALUES ('Monica and Chandler', 'Television')")
+
 
     connection.commit()
     connection.close()
@@ -56,3 +60,10 @@ def test_app():
         { "name": "person2", "gender": "female", "hair_color": "brown" }
     ]    
     assert len(search(query)) == 1
+
+def test_tags():
+    build_test_db()
+    query = {
+        "tag": 'Television'    
+    }
+    assert len(get_groups_with_tag(query)) == 1

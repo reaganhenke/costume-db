@@ -160,3 +160,14 @@ def create_person_list_from_query(query):
         new_individual = Individual(person["name"], person["gender"].upper(), person["hair_color"].upper())
         person_list.append(new_individual)
     return person_list
+
+def get_groups_with_tag(query):
+    connection = sqlite3.connect(db_location)
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * from group_tags WHERE tag=?", (query["tag"],))
+    costume_groups = cursor.fetchall()
+
+    return [c[0] for c in costume_groups]
+
+    connection.close()
