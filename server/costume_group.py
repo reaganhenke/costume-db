@@ -10,10 +10,13 @@ class CostumeGroup:
         self.members.append(individual)
 
     def __str__(self):
-        string = f"{self.name}: "
+        string = f"({self.name}: "
         for member in self.members:
             string += str(member)
             string += ', '
 
-        return string[:-1]
+        return string[:-2] + ')'
+
+    def __repr__(self):
+        return self.__str__()
         

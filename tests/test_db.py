@@ -4,6 +4,8 @@ import sys
 sys.path.insert(0, '/home/stephen/projects/costume-db')
 from server.app import search
 import os
+from server.individual import Individual
+
 
 
 def build_test_db():
@@ -52,8 +54,8 @@ def test_app():
     query = {
         'number_of_people': 2,
         'people': [
-            ('MALE', 'BROWN'),
-            ('FEMALE', 'BROWN')
+            Individual('p1', 'MALE', 'BROWN'),
+            Individual('p2', 'FEMALE', 'BROWN')
         ]
     }
     

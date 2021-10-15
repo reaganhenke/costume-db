@@ -4,9 +4,11 @@ import os
 from server.individual import Individual
 from server.costume_group import CostumeGroup
 import copy
+import logging
 
 app = Flask(__name__)
 db_location = 'tests/test-costumes.db'
+logging.basicConfig(level=logging.DEBUG)
 
 
 @app.route("/")
@@ -17,34 +19,101 @@ def index():
     cursor.execute("INSERT INTO costumes VALUES ('Salt and Pepper', 2)")
     cursor.execute("INSERT INTO costumes VALUES ('Gritty', 1)")
 
-def is_costume_a_match(costume_group, query):
-    # for each person in the query, look at the individuals of the costume group
-    # if there's a match, remove that person from the costume group
+def person_in_matrix(person, match_matrix):
+    """Test whether a person is already in the match_matrix
 
-    member_list = copy.deepcopy(costume_group.members)
-    # deep copy to avoid mutating costume_group
+    Args:
+        person (Individual): The person we're looking for
+        match_matrix (List[Boolean]): The current list of filled and unfilled slots
 
-    is_good_match = True
-    for person_index, person in enumerate(query['people']):
-        individual_removed = False
-        for individual_index, individual in enumerate(member_list):
-            if individual.hair_color_matches(person[1]) and \
-               individual.gender_matches(person[0]):
-                # remove individual from List
-                for member in member_list:
-                    if member.name == individual.name:
-                        member_list.pop(individual_index)
-                        break
-                individual_removed = True
-                break
+    Returns:
+        Boolean: Whether the person is already in the matrix or not
+    """
+    # Checks each slot in member_list and return
+    #logging.debug(f"Checking person vs. member_list: {person} | {match_matrix}")
+    return not all([not person == match for match in match_matrix])
 
-        if not individual_removed:
-            is_good_match = False
-            break # person can't fit in costume group, costume is therefore bad
-    return is_good_match
 
+# Determine if a person from the query is a valid fit for a member of a costume group
+# Person must match qualifications for the costume_member and not already be
+# in the match_matrix
+def possible_match(person, costume_member, match_matrix):
+    """Determine if a person is a suitable match for a costume group member
+
+    We test both:
+        1. Each of the characteristics of the costume (we want all of these to be True)
+        2. Whether the person has already been assigned or not (we want this to be False)
+
+    Args:
+        person (Individual): The person seeking a costume
+        costume_member (Individual): The costume group member we're looking to fill
+        match_matrix (List[Boolean]): The current matrix of roles that have been filled
+
+    Returns:
+        Boolean: Whether the person both matches the costume member, and is unassigned
+    """
+    logging.debug(f"Looking at possible match: {person} | {costume_member} | {match_matrix}")
+    logging.debug(f"{person.gender} == {costume_member.gender} -> {person.gender == costume_member.gender}")
+    logging.debug(f"{person.hair_color} == {costume_member.hair_color} -> {person.hair_color == costume_member.hair_color}")
+    logging.debug(f"Person in match matrix? -> {person_in_matrix(person, match_matrix)}")
+    return person.gender == costume_member.gender and \
+           person.hair_color == costume_member.hair_color and not \
+           person_in_matrix(person, match_matrix)
+
+def is_costume_a_match(costume_group, query, match_matrix):
+    """Given a list of people and a costume group, determine if the people satisfy the costume's constraints
+
+    This works via a simple backtracking algorithm, similar to one used to solve Sudoku puzzles.
+    If there is an unassigned slot, iterate through every person to determine if any of them are suitable
+    If we find on that works, fill the slot and move onto the next one
+    If no people can fill a slot, mark the previous slot as empty and start there
+    We continue until we either fill the matrix (return True)
+    or we determine that no person can match a costume group member (False)
+
+
+    Args:
+        costume_group (CostumeGroup): The costume group we're trying to fill
+        query (SearchQuery): The query containing the people that submitted the form
+        match_matrix (List[Boolean]): A matrix tracking which slots have been filled, and by whom
+
+    Returns:
+        Boolean: Whether the group of people satisfy the constraints of the costume group
+    """
+
+    logging.debug(f"Match matrix: {match_matrix}")
+    for idx, match in enumerate(match_matrix):
+        logging.debug(f"{idx}, {match}, {match is None}")
+        if match is None:
+            for person in query['people']:
+                if possible_match(person, costume_group.members[idx], match_matrix):
+                    logging.debug(f"{person} is a possible match!\n")
+                    match_matrix[idx] = person
+                    is_costume_a_match(costume_group, query, match_matrix)
+                    if None not in match_matrix:
+                        logging.debug(f"Solution found! {match_matrix}")
+                        return True
+                    match_matrix[idx] = None # backtrack step
+                    logging.debug(f"Match matrix after backtrack: {match_matrix}")
+                else:
+                    logging.debug(f"{person} is not a possible match!\n")
+            logging.debug("Done with all people! No solutions found")
+            return False
+
+    logging.debug("Solution found! Outside loop")
 
 def search(query):
+    """Given a query, return all possible costume groups the people in the query satisfy
+
+    We first pull from the costume database all costume groups that both:
+        1. Match the group size of the query
+        2. Match the tags of the query, if any
+
+    This reduces the number of costumes we match against by a fair amount
+
+    Args:
+        query (SearchQuery): The group of people, and their characteristics, for whom we're looking for costumes
+    """
+    logging.debug("Time to search!")
     connection = sqlite3.connect(db_location)
     cursor = connection.cursor()
 
@@ -70,12 +139,15 @@ def search(query):
 
         costume_groups_with_members.append(new_costume_group)
 
-   # For each grouping, apply the other data filters from the query - discard groupings that don't match
+    logging.debug(f"Our candidates: {costume_groups_with_members}\n")
+    connection.close()
+
+    # For each grouping, apply the other data filters from the query - discard groupings that don't match
     matching_costume_groups = []
     for costume_group in costume_groups_with_members:
-        if is_costume_a_match(costume_group, query):
+        match_matrix = [None] * len(costume_group.members)
+        logging.debug(f"Attempting: {costume_group.name}")
+        if is_costume_a_match(costume_group, query, match_matrix):
             matching_costume_groups.append(costume_group)
     
     return matching_costume_groups
-
-    connection.close()
