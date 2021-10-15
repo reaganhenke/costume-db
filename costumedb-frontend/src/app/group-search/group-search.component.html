@@ -18,9 +18,9 @@
     <p>Now tell us about the costumes you're looking for!</p>
     <div *ngFor="let costume of group; let i = index" class="costume-form" id="costume-{{i}}">
       <h3>costume {{i + 1}}</h3>
-      <button *ngIf="group.length > 2" (click)="removeCostume(i)" class="close"><img alt="close" src="../../assets/close.svg"></button>
+      <button *ngIf="group.length > 2" (click)="removeCostume(i)" class="close"><img alt="close" src="assets/close.svg"></button>
 
-        <img src="../../assets/ghost.svg" alt="ghost" class="ghost">
+        <img src="assets/ghost.svg" alt="ghost" class="ghost">
 
         <form [formGroup]="costume">
           <span class="basics">
@@ -54,7 +54,7 @@
         </form>
 
     </div>
-    <button (click)="addCostume()" class="add">add another <img alt="" src="../../assets/plus.svg"></button>
+    <button (click)="addCostume()" class="add">add another <img alt="" src="assets/plus.svg"></button>
     <span class="button-wrapper">
       <button (click)="reset()" class="reset">reset</button>
       <button (click)="submit()">submit</button>
