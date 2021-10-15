@@ -26,6 +26,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+## Deploy
+
+The site is deployed with Github Pages and uses [Angular CLI GithubPages](https://www.npmjs.com/package/angular-cli-ghpages). To deploy, run `ng deploy --base-href=/costume-db/` from the frontend branch.
+
+This will create an auto generated commit in the gh-pages branch and will be live automatically.
 
 ## TODO
 - [x] read parameter on theme page

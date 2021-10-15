@@ -129,10 +129,7 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy",
-          "options": {
-            "base-href": "/costume-db/"
-          }
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
