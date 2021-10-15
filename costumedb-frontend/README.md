@@ -56,3 +56,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [ ] update themes to be correct
 - [ ] source database images
 - [ ] fix web manifest
+- [ ] reduce scss size for group search and header
