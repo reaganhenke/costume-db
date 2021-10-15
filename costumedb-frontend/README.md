@@ -45,6 +45,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] add caching for theme results
 - [x] flesh out text on homepage
 
+- [ ] add deploy with github pages
 - [ ] add google analytics
 - [ ] add privacy policy
 - [ ] add terms of use
