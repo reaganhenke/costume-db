@@ -22,9 +22,9 @@ def build_test_db():
     cursor.execute("INSERT INTO individuals VALUES ('Chandler Bing', 'MALE', 'BROWN')")
     cursor.execute("INSERT INTO individuals VALUES ('Monica Geller', 'FEMALE', 'BROWN')")
 
-    cursor.execute("CREATE TABLE groups (name TEXT, group_size INTEGER)")
-    cursor.execute("INSERT INTO groups VALUES ('Salt and Pepper', 2)")
-    cursor.execute("INSERT INTO groups VALUES ('Monica and Chandler', 2)")
+    cursor.execute("CREATE TABLE groups (name TEXT, group_size INTEGER, description TEXT)")
+    cursor.execute("INSERT INTO groups VALUES ('Salt and Pepper', 2, 'An all-time classic')")
+    cursor.execute("INSERT INTO groups VALUES ('Monica and Chandler', 2, 'Friends first, lovers later, Monica and Chandler make a perfect pair.')")
 
     # Group is a keyword in sqlite3, use group_name instead
     cursor.execute("CREATE TABLE individuals_groups (individual TEXT, group_name TEXT)")

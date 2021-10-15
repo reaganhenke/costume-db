@@ -127,7 +127,8 @@ def search(query):
 
     for group in costume_groups:
         costume_group_name = group[0]
-        new_costume_group = CostumeGroup(costume_group_name)
+        costume_group_description = group[1]
+        new_costume_group = CostumeGroup(costume_group_name, costume_group_description)
 
         cursor.execute("SELECT * from individuals_groups WHERE group_name=?", (costume_group_name,))
         members = cursor.fetchall()
