@@ -60,7 +60,7 @@ def possible_match(person, costume_member, match_matrix):
            person.hair_color == costume_member.hair_color and not \
            person_in_matrix(person, match_matrix)
 
-def is_costume_a_match(costume_group, query, match_matrix):
+def is_costume_a_match(costume_group, person_list, match_matrix):
     """Given a list of people and a costume group, determine if the people satisfy the costume's constraints
 
     This works via a simple backtracking algorithm, similar to one used to solve Sudoku puzzles.
@@ -73,7 +73,7 @@ def is_costume_a_match(costume_group, query, match_matrix):
 
     Args:
         costume_group (CostumeGroup): The costume group we're trying to fill
-        query (SearchQuery): The query containing the people that submitted the form
+        person_list (List[Individual`]): The people that submitted the form
         match_matrix (List[Boolean]): A matrix tracking which slots have been filled, and by whom
 
     Returns:
@@ -84,11 +84,11 @@ def is_costume_a_match(costume_group, query, match_matrix):
     for idx, match in enumerate(match_matrix):
         logging.debug(f"{idx}, {match}, {match is None}")
         if match is None:
-            for person in query['people']:
+            for person in person_list:
                 if possible_match(person, costume_group.members[idx], match_matrix):
                     logging.debug(f"{person} is a possible match!\n")
                     match_matrix[idx] = person
-                    is_costume_a_match(costume_group, query, match_matrix)
+                    is_costume_a_match(costume_group, person_list, match_matrix)
                     if None not in match_matrix:
                         logging.debug(f"Solution found! {match_matrix}")
                         return True
@@ -113,12 +113,13 @@ def search(query):
     Args:
         query (SearchQuery): The group of people, and their characteristics, for whom we're looking for costumes
     """
+    person_list = create_person_list_from_query(query)
     logging.debug("Time to search!")
     connection = sqlite3.connect(db_location)
     cursor = connection.cursor()
 
     # Use individual count to grab all items in main db that match value
-    cursor.execute("SELECT * FROM groups WHERE group_size=?", (query['number_of_people'],))
+    cursor.execute("SELECT * FROM groups WHERE group_size=?", (len(person_list),))
     costume_groups = cursor.fetchall()
 
     # Create groupings
@@ -147,7 +148,15 @@ def search(query):
     for costume_group in costume_groups_with_members:
         match_matrix = [None] * len(costume_group.members)
         logging.debug(f"Attempting: {costume_group.name}")
-        if is_costume_a_match(costume_group, query, match_matrix):
+        if is_costume_a_match(costume_group, person_list, match_matrix):
             matching_costume_groups.append(costume_group)
     
     return matching_costume_groups
+
+
+def create_person_list_from_query(query):
+    person_list = []
+    for person in query:
+        new_individual = Individual(person["name"], person["gender"].upper(), person["hair_color"].upper())
+        person_list.append(new_individual)
+    return person_list

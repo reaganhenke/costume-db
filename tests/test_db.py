@@ -51,12 +51,8 @@ def test_number_of_entries():
 def test_app():
     build_test_db()
     # Query: two people, male/female, brown/brown
-    query = {
-        'number_of_people': 2,
-        'people': [
-            Individual('p1', 'MALE', 'BROWN'),
-            Individual('p2', 'FEMALE', 'BROWN')
-        ]
-    }
-    
+    query = [
+        { "name": "person1", "gender": "male", "hair_color": "brown" },
+        { "name": "person2", "gender": "female", "hair_color": "brown" }
+    ]    
     assert len(search(query)) == 1
