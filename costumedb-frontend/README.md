@@ -46,6 +46,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [x] flesh out text on homepage
 - [x] set up deploy with github pages
 - [x] buy domain
+- [x] add name field
+- [x] rename hair field
 
 - [ ] add google analytics
 - [ ] add privacy policy
@@ -53,3 +55,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [ ] fill out credits
 - [ ] update themes to be correct
 - [ ] source database images
+- [ ] fix web manifest
