@@ -6,31 +6,50 @@ This folder contains the frontend site for CostumeDB. Generated with [Angular CL
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
 ## Deploy
 
-The site is deployed with Github Pages and uses [Angular CLI GithubPages](https://www.npmjs.com/package/angular-cli-ghpages). To deploy, run `ng deploy --base-href=/costume-db/` from the frontend branch.
+The site is deployed with Github Pages and uses [Angular CLI GithubPages](https://www.npmjs.com/package/angular-cli-ghpages). To deploy, run `ng deploy` from the frontend branch.
 
-This will create an auto generated commit in the gh-pages branch and will be live automatically.
+This will create an auto generated commit in the gh-pages branch and will be live automatically at [CostumeDatabase.com](https://costumedatabase.com/).
+
+## Data Contracts
+
+The group search form collects information about a group in an array. The model is defined in [costume-request.model.ts](/costumedb-frontend/src/app/models/costume-request.model.ts). A blank field indicates "any".
+
+Example:
+```json
+[{
+  "name": "person1",
+  "gender": "male",
+  "hair_color": "brown"
+}, {
+  "name": "person2",
+  "gender": "",
+  "hair_color": "red"
+}]
+```
+
+The site expects a response with fields name, origin, imageUrl, fandomLink and description. The model is defined in [costume-response.model.ts](/costumedb-frontend/src/app/models/costume-response.model.ts)
+
+Example:
+```json
+[
+  {
+    "name": "Ross and Rachel",
+    "origin": "Friends",
+    "imageUrl": "https://static.wikia.nocookie.net/friends/images/c/c9/Ross_and_Rachel_-_Final_Kiss_-_10x18.png",
+    "fandomLink": "https://friends.fandom.com/wiki/Ross_and_Rachel",
+    "description": "On again off again Rachel and Ross are one of the central couples on Friends. Were they on a break? It's up to you!"
+  },
+  {
+    "name": "Belcher Kids",
+    "origin": "Bob's Burgers",
+    "imageUrl": "https://i.imgur.com/95UDajH.png",
+    "fandomLink": "https://bobs-burgers.fandom.com/wiki/Belcher_Family",
+    "description": "No siblings are closer than Tina, Gene, and Louise!"
+  }
+]
+```
 
 ## TODO
 - [x] read parameter on theme page
@@ -53,11 +72,11 @@ This will create an auto generated commit in the gh-pages branch and will be liv
 - [x] buy domain
 - [x] add name field
 - [x] rename hair field
+- [x] add privacy policy
+- [x] add terms of use
+- [x] fill out credits
 
 - [ ] add google analytics
-- [ ] add privacy policy
-- [ ] add terms of use
-- [ ] fill out credits
 - [ ] update themes to be correct
 - [ ] source database images
 - [ ] fix web manifest
