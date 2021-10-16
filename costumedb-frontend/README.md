@@ -14,7 +14,7 @@ This will create an auto generated commit in the gh-pages branch and will be liv
 
 ## Data Contracts
 
-The group search form collects information about a group in an array. The model is defined in [costume-request.model.ts](costumedb-frontend/src/app/models/costume-request.model.ts). A blank field indicates "any".
+The group search form collects information about a group in an array. The model is defined in [costume-request.model.ts](/costumedb-frontend/src/app/models/costume-request.model.ts). A blank field indicates "any".
 
 Example:
 ```json
