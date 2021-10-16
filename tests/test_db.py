@@ -22,9 +22,9 @@ def build_test_db():
     cursor.execute("INSERT INTO individuals VALUES ('Chandler Bing', 'MALE', 'BROWN')")
     cursor.execute("INSERT INTO individuals VALUES ('Monica Geller', 'FEMALE', 'BROWN')")
 
-    cursor.execute("CREATE TABLE groups (name TEXT, group_size INTEGER, description TEXT)")
-    cursor.execute("INSERT INTO groups VALUES ('Salt and Pepper', 2, 'An all-time classic')")
-    cursor.execute("INSERT INTO groups VALUES ('Monica and Chandler', 2, 'Friends first, lovers later, Monica and Chandler make a perfect pair.')")
+    cursor.execute("CREATE TABLE groups (name TEXT, group_size INTEGER, description TEXT, image_url TEXT)")
+    cursor.execute("INSERT INTO groups VALUES ('Salt and Pepper', 2, 'An all-time classic', 'https://i5.walmartimages.com/asr/5dd3ac4f-c6f5-4fd3-bed7-ce1a0199e913_1.997790a424bc609bbcc6dc883e5d3474.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF')")
+    cursor.execute("INSERT INTO groups VALUES ('Monica and Chandler', 2, 'Friends first, lovers later, Monica and Chandler make a perfect pair.', 'https://i.imgur.com/q1F6tzO.png')")
 
     # Group is a keyword in sqlite3, use group_name instead
     cursor.execute("CREATE TABLE individuals_groups (individual TEXT, group_name TEXT)")

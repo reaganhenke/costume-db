@@ -1,8 +1,9 @@
 class CostumeGroup:
-    def __init__(self, name, description):
+    def __init__(self, name, description, image_url):
         self.name = name
         self.members = []
         self.description = description
+        self.image_url = image_url
 
     def group_size(self):
         return len(self.members)

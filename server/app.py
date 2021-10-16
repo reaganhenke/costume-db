@@ -13,6 +13,10 @@ logging.basicConfig(level=logging.DEBUG)
 
 @app.route("/")
 def index():
+    try:
+        os.remove("costumes.db")
+    except:
+        pass
     connection = sqlite3.connect("costumes.db")
     cursor = connection.cursor()
     cursor.execute("CREATE TABLE costumes (name TEXT, individual_count INTEGER)")
@@ -127,8 +131,9 @@ def search(query):
 
     for group in costume_groups:
         costume_group_name = group[0]
-        costume_group_description = group[1]
-        new_costume_group = CostumeGroup(costume_group_name, costume_group_description)
+        costume_group_description = group[2]
+        costume_group_image_url = group[3]
+        new_costume_group = CostumeGroup(costume_group_name, costume_group_description, costume_group_image_url)
 
         cursor.execute("SELECT * from individuals_groups WHERE group_name=?", (costume_group_name,))
         members = cursor.fetchall()
