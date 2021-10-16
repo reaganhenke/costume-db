@@ -10,19 +10,6 @@ app = Flask(__name__)
 db_location = 'tests/test-costumes.db'
 logging.basicConfig(level=logging.DEBUG)
 
-
-@app.route("/")
-def index():
-    try:
-        os.remove("costumes.db")
-    except:
-        pass
-    connection = sqlite3.connect("costumes.db")
-    cursor = connection.cursor()
-    cursor.execute("CREATE TABLE costumes (name TEXT, individual_count INTEGER)")
-    cursor.execute("INSERT INTO costumes VALUES ('Salt and Pepper', 2)")
-    cursor.execute("INSERT INTO costumes VALUES ('Gritty', 1)")
-
 def person_in_matrix(person, match_matrix):
     """Test whether a person is already in the match_matrix
 
