@@ -75,9 +75,9 @@ Example:
 - [x] add privacy policy
 - [x] add terms of use
 - [x] fill out credits
+- [x] add google analytics
+- [x] fix web manifest issue
 
-- [ ] add google analytics
 - [ ] update themes to be correct
 - [ ] source database images
-- [ ] fix web manifest
 - [ ] reduce scss size for group search and header
