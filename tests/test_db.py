@@ -22,9 +22,9 @@ def build_test_db():
     cursor.execute("INSERT INTO individuals VALUES ('Chandler Bing', 'MALE', 'BROWN')")
     cursor.execute("INSERT INTO individuals VALUES ('Monica Geller', 'FEMALE', 'BROWN')")
 
-    cursor.execute("CREATE TABLE groups (name TEXT, group_size INTEGER, description TEXT, image_url TEXT)")
-    cursor.execute("INSERT INTO groups VALUES ('Salt and Pepper', 2, 'An all-time classic', 'https://i5.walmartimages.com/asr/5dd3ac4f-c6f5-4fd3-bed7-ce1a0199e913_1.997790a424bc609bbcc6dc883e5d3474.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF')")
-    cursor.execute("INSERT INTO groups VALUES ('Monica and Chandler', 2, 'Friends first, lovers later, Monica and Chandler make a perfect pair.', 'https://i.imgur.com/q1F6tzO.png')")
+    cursor.execute("CREATE TABLE groups (name TEXT, group_size INTEGER, description TEXT, image_url TEXT, origin TEXT, fandom_url TEXT)")
+    cursor.execute("INSERT INTO groups VALUES ('Salt and Pepper', 2, 'An all-time classic', 'https://i5.walmartimages.com/asr/5dd3ac4f-c6f5-4fd3-bed7-ce1a0199e913_1.997790a424bc609bbcc6dc883e5d3474.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF', 'Blue''s Clues', 'https://bluesclues.fandom.com/wiki/The_Spice_Family')")
+    cursor.execute("INSERT INTO groups VALUES ('Monica and Chandler', 2, 'Friends first, lovers later, Monica and Chandler make a perfect pair.', 'https://i.imgur.com/q1F6tzO.png', 'Friends', 'https://friends.fandom.com/wiki/Monica_and_Chandler')")
 
     # Group is a keyword in sqlite3, use group_name instead
     cursor.execute("CREATE TABLE individuals_groups (individual TEXT, group_name TEXT)")
