@@ -1,14 +1,18 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 import sqlite3
 import os
 from server.individual import Individual
 from server.costume_group import CostumeGroup
 import copy
+import json
 import logging
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 db_location = 'tests/test-costumes.db'
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
+#logging.getLogger('flask_cors').level = logging.DEBUG
 
 def person_in_matrix(person, match_matrix):
     """Test whether a person is already in the match_matrix
@@ -91,8 +95,11 @@ def is_costume_a_match(costume_group, person_list, match_matrix):
             return False
 
     logging.debug("Solution found! Outside loop")
+    
 
-def search(query):
+@app.route('/groupsearch', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def search():
     """Given a query, return all possible costume groups the people in the query satisfy
 
     We first pull from the costume database all costume groups that both:
@@ -104,7 +111,8 @@ def search(query):
     Args:
         query (SearchQuery): The group of people, and their characteristics, for whom we're looking for costumes
     """
-    person_list = create_person_list_from_query(query)
+    json_data = request.get_json(force=True)
+    person_list = create_person_list_from_query(json_data["query"])
     logging.debug("Time to search!")
     connection = sqlite3.connect(db_location)
     cursor = connection.cursor()
@@ -145,8 +153,18 @@ def search(query):
         logging.debug(f"Attempting: {costume_group.name}")
         if is_costume_a_match(costume_group, person_list, match_matrix):
             matching_costume_groups.append(costume_group)
+
+    response_json = []
+    for matching_costume in matching_costume_groups:
+        response_json.append({
+            'name': matching_costume.name,
+            'origin': matching_costume.origin,
+            'imageUrl': matching_costume.image_url,
+            'fandomLink': matching_costume.fandom_url,
+            'description': matching_costume.description
+        })
     
-    return matching_costume_groups
+    return jsonify(response_json)
 
 
 def create_person_list_from_query(query):
