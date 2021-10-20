@@ -71,10 +71,10 @@ def test_search():
     assert len(res.json()) == 1
     assert res.json()[0]["name"] == "Monica and Chandler"
 
-def test_tags():
+def test_theme():
     build_test_db()
     tag = 'Television'
-    res = requests.get(f"http://localhost:5000/tag/{tag}")
+    res = requests.get(f"http://localhost:5000/theme/{tag}")
     assert res.status_code == 200
     assert len(res.json()) == 1
     assert res.json()[0]["name"] == "Monica and Chandler"
