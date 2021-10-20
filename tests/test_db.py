@@ -2,7 +2,8 @@
 import sqlite3
 import sys
 sys.path.insert(0, '/home/stephen/projects/costume-db')
-from server.app import search, get_groups_with_tag
+from server.app import search, get_groups_with_tag, search_by_text
+import requests
 import os
 from server.individual import Individual
 
@@ -34,8 +35,12 @@ def build_test_db():
     cursor.execute("INSERT INTO individuals_groups VALUES ('Chandler Bing', 'Monica and Chandler')")
 
     cursor.execute("CREATE TABLE group_tags (group_name TEXT, tag TEXT)")
-    cursor.execute("INSERT INTO group_tags VALUES ('Salt and Pepper', 'Classic')")
-    cursor.execute("INSERT INTO group_tags VALUES ('Monica and Chandler', 'Television')")
+    cursor.execute("INSERT INTO group_tags VALUES ('Salt and Pepper', 'classic')")
+    cursor.execute("INSERT INTO group_tags VALUES ('Monica and Chandler', 'television')")
+
+    cursor.execute("CREATE VIRTUAL TABLE search_titles USING fts5(name)")
+    cursor.execute("INSERT INTO search_titles VALUES ('Salt and Pepper')")
+    cursor.execute("INSERT INTO search_titles VALUES ('Monica and Chandler')")
 
 
     connection.commit()
@@ -52,18 +57,35 @@ def test_number_of_entries():
     assert costume_count == 4
 
 
-def test_app():
+def test_search():
     build_test_db()
     # Query: two people, male/female, brown/brown
-    query = [
-        { "name": "person1", "gender": "male", "hair_color": "brown" },
-        { "name": "person2", "gender": "female", "hair_color": "brown" }
-    ]    
-    assert len(search(query)) == 1
+    query = {
+        "query": [
+            { "name": "person1", "gender": "male", "hair_color": "brown" },
+            { "name": "person2", "gender": "female", "hair_color": "brown" }
+        ]
+    }
+    res = requests.post("http://localhost:5000/groupsearch", json=query)
+    assert res.status_code == 200
+    assert len(res.json()) == 1
+    assert res.json()[0]["name"] == "Monica and Chandler"
 
 def test_tags():
     build_test_db()
+    tag = 'Television'
+    res = requests.get(f"http://localhost:5000/tag/{tag}")
+    assert res.status_code == 200
+    assert len(res.json()) == 1
+    assert res.json()[0]["name"] == "Monica and Chandler"
+
+
+def test_tagsearch():
+    build_test_db()
     query = {
-        "tag": 'Television'    
+        "query": "salt"
     }
-    assert len(get_groups_with_tag(query)) == 1
+    res = requests.post("http://localhost:5000/textsearch", json=query)
+    assert res.status_code == 200
+    assert len(res.json()) == 1
+    assert res.json()[0]["name"] == "Salt and Pepper"

@@ -11,7 +11,7 @@ import logging
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 db_location = 'tests/test-costumes.db'
-#logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 #logging.getLogger('flask_cors').level = logging.DEBUG
 
 def person_in_matrix(person, match_matrix):
@@ -174,13 +174,67 @@ def create_person_list_from_query(query):
         person_list.append(new_individual)
     return person_list
 
-def get_groups_with_tag(query):
+@app.route('/theme/<tag>', methods=['GET'])
+@cross_origin(support_credentials=True)
+def get_groups_with_tag(tag):
     connection = sqlite3.connect(db_location)
     cursor = connection.cursor()
 
-    cursor.execute("SELECT * from group_tags WHERE tag=?", (query["tag"],))
+    cursor.execute("SELECT * from group_tags WHERE tag=?", (tag.lower(),))
     costume_groups = cursor.fetchall()
 
-    return [c[0] for c in costume_groups]
-
+    response_json = []
+    for costume in costume_groups:
+        cursor.execute("SELECT * from groups WHERE name=?", (costume[0],))
+        group = cursor.fetchall()[0]
+        costume_group_name = group[0]
+        costume_group_description = group[2]
+        costume_group_image_url = group[3]
+        costume_group_origin = group[4]
+        costume_group_fandom_url = group[5]
+        new_costume_group = CostumeGroup(costume_group_name, costume_group_description, costume_group_image_url, costume_group_origin, costume_group_fandom_url)
+        response_json.append({
+            'name': new_costume_group.name,
+            'origin': new_costume_group.origin,
+            'imageUrl': new_costume_group.image_url,
+            'fandomLink': new_costume_group.fandom_url,
+            'description': new_costume_group.description
+        })
     connection.close()
+    return jsonify(response_json)
+
+@app.route('/textsearch', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def search_by_text():
+    connection = sqlite3.connect(db_location)
+    cursor = connection.cursor()
+
+    json_data = request.get_json(force=True)
+    search_term = json_data["query"]
+    cursor.execute("SELECT * FROM search_titles WHERE name MATCH ?", (search_term,))
+    #TODO test text search
+    costume_groups = cursor.fetchall()
+
+    response_json = []
+    for costume in costume_groups:
+        cursor.execute("SELECT * from groups WHERE name=?", (costume[0],))
+        group = cursor.fetchall()[0]
+        costume_group_name = group[0]
+        costume_group_description = group[2]
+        costume_group_image_url = group[3]
+        costume_group_origin = group[4]
+        costume_group_fandom_url = group[5]
+        new_costume_group = CostumeGroup(costume_group_name, costume_group_description, costume_group_image_url, costume_group_origin, costume_group_fandom_url)
+        response_json.append({
+            'name': new_costume_group.name,
+            'origin': new_costume_group.origin,
+            'imageUrl': new_costume_group.image_url,
+            'fandomLink': new_costume_group.fandom_url,
+            'description': new_costume_group.description
+        })
+    connection.close()
+    return jsonify(response_json)
+
+
+    connection.close()  
+    return "GOOD JOB!"
