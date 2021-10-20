@@ -7,6 +7,8 @@ name = "pypi"
 flask = "*"
 better-exceptions = "*"
 pytest = "*"
+flask-cors = "*"
+requests = "*"
 
 [dev-packages]
 

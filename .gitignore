@@ -1,6 +1,7 @@
 ## Random Files
 run-flask.sh
 run-tests.sh
+*.db
 
 ## VSCode
 

@@ -1,27 +1,15 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 import sqlite3
-import os
 from server.individual import Individual
 from server.costume_group import CostumeGroup
-import copy
 import logging
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 db_location = 'tests/test-costumes.db'
 logging.basicConfig(level=logging.DEBUG)
-
-
-@app.route("/")
-def index():
-    try:
-        os.remove("costumes.db")
-    except:
-        pass
-    connection = sqlite3.connect("costumes.db")
-    cursor = connection.cursor()
-    cursor.execute("CREATE TABLE costumes (name TEXT, individual_count INTEGER)")
-    cursor.execute("INSERT INTO costumes VALUES ('Salt and Pepper', 2)")
-    cursor.execute("INSERT INTO costumes VALUES ('Gritty', 1)")
+#logging.getLogger('flask_cors').level = logging.DEBUG
 
 def person_in_matrix(person, match_matrix):
     """Test whether a person is already in the match_matrix
@@ -104,8 +92,11 @@ def is_costume_a_match(costume_group, person_list, match_matrix):
             return False
 
     logging.debug("Solution found! Outside loop")
+    
 
-def search(query):
+@app.route('/groupsearch', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def search():
     """Given a query, return all possible costume groups the people in the query satisfy
 
     We first pull from the costume database all costume groups that both:
@@ -117,7 +108,8 @@ def search(query):
     Args:
         query (SearchQuery): The group of people, and their characteristics, for whom we're looking for costumes
     """
-    person_list = create_person_list_from_query(query)
+    json_data = request.get_json(force=True)
+    person_list = create_person_list_from_query(json_data["query"])
     logging.debug("Time to search!")
     connection = sqlite3.connect(db_location)
     cursor = connection.cursor()
@@ -130,20 +122,15 @@ def search(query):
     costume_groups_with_members = []
 
     for group in costume_groups:
-        costume_group_name = group[0]
-        costume_group_description = group[2]
-        costume_group_image_url = group[3]
-        costume_group_origin = group[4]
-        costume_group_fandom_url = group[5]
-        new_costume_group = CostumeGroup(costume_group_name, costume_group_description, costume_group_image_url, costume_group_origin, costume_group_fandom_url)
+        new_costume_group = CostumeGroup(*group)
 
-        cursor.execute("SELECT * from individuals_groups WHERE group_name=?", (costume_group_name,))
+        cursor.execute("SELECT * from individuals_groups WHERE group_name=?", (group[0],))
         members = cursor.fetchall()
 
         for member in members:
             cursor.execute("SELECT * from individuals WHERE name=?", (member[0],))
             individual = cursor.fetchall()[0]
-            new_individual = Individual(individual[0], individual[1], individual[2])
+            new_individual = Individual(*individual)
             new_costume_group.add_member(new_individual)
 
         costume_groups_with_members.append(new_costume_group)
@@ -158,8 +145,12 @@ def search(query):
         logging.debug(f"Attempting: {costume_group.name}")
         if is_costume_a_match(costume_group, person_list, match_matrix):
             matching_costume_groups.append(costume_group)
+
+    response_json = []
+    for matching_costume in matching_costume_groups:
+        response_json.append(matching_costume.__dict__())
     
-    return matching_costume_groups
+    return jsonify(response_json)
 
 
 def create_person_list_from_query(query):
@@ -169,13 +160,46 @@ def create_person_list_from_query(query):
         person_list.append(new_individual)
     return person_list
 
-def get_groups_with_tag(query):
+@app.route('/theme/<tag>', methods=['GET'])
+@cross_origin(support_credentials=True)
+def get_groups_with_tag(tag):
     connection = sqlite3.connect(db_location)
     cursor = connection.cursor()
 
-    cursor.execute("SELECT * from group_tags WHERE tag=?", (query["tag"],))
+    cursor.execute("SELECT * from group_tags WHERE tag=?", (tag.lower(),))
     costume_groups = cursor.fetchall()
 
-    return [c[0] for c in costume_groups]
+    response_json = get_list_of_group_dicts(costume_groups)
+    return jsonify(response_json)
+
+@app.route('/textsearch', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def search_by_text():
+    json_data = request.get_json(force=True)
+    search_term = json_data["query"]
+
+    connection = sqlite3.connect(db_location)
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM search_titles WHERE name MATCH ?", (search_term,))
+    costume_groups = cursor.fetchall()
 
     connection.close()
+
+    response_json = get_list_of_group_dicts(costume_groups)
+    return jsonify(response_json)
+
+
+def get_list_of_group_dicts(costume_groups):
+    group_list = []
+    connection = sqlite3.connect(db_location)
+    cursor = connection.cursor()
+
+    for costume in costume_groups:
+        cursor.execute("SELECT * from groups WHERE name=?", (costume[0],))
+        group = cursor.fetchall()[0]
+        # unpack the tuple into function arguments
+        new_costume_group = CostumeGroup(*group)
+        group_list.append(new_costume_group.__dict__())
+    connection.close()
+    return group_list
