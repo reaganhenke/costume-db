@@ -1,6 +1,7 @@
 export const themes: [String, String][] = [
-  ['Couples Costumes', 'couple'],
+  ['Couples', 'couple'],
   ['Television', 'television'],
-  ['Animation', 'animation'],
-  ['Adult', 'NSFW']
+  ['Disney', 'disney'],
+  ['Siblings', 'siblings'],
+  ['Family', 'family']
 ]
