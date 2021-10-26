@@ -6,7 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./share-page.component.scss']
 })
 export class SharePageComponent {
-  isLoading = true;
-
   constructor() { }
+
+  demo = { "name": "Ross and Rachel", "origin": "Friends", "imageUrl":
+    "https://static.wikia.nocookie.net/friends/images/c/c9/Ross_and_Rachel_-_Final_Kiss_-_10x18.png",
+    "fandomLink": "https://friends.fandom.com/wiki/Ross_and_Rachel",
+    "description": "On again off again Rachel and Ross are one of the central couples on Friends",
+    "theme": [],
+    "size": 2, "characters": [ { "hair": "brown", "gender": "male" }, { "hair": "brown", "gender": "female" } ] 
+  }
 }

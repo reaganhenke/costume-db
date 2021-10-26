@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CostumeResponseObject } from 'src/app/models/costume-response.model';
+import { CostumeResponseObject, GitRowsCostumeResponseObject } from 'src/app/models/costume-response.model';
 
 export const loadThemeSearch = createAction(
   '[Theme Search] Load Theme Search',
@@ -8,7 +8,7 @@ export const loadThemeSearch = createAction(
 
 export const loadThemeSearchSuccess = createAction(
   '[Theme Search] Load Theme Search Success',
-  props<{response: CostumeResponseObject[]}>()
+  props<{response: GitRowsCostumeResponseObject[]}>()
 );
 
 export const loadThemeSearchError = createAction(

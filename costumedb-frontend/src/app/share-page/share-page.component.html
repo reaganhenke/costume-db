@@ -1,4 +1,14 @@
-<app-loading *ngIf="isLoading"></app-loading>
-<div class="form-wrapper" [class.hide]="isLoading">
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe5CY-ypt64-uWegRDDJ2MmDsXM-5fXPGPa3P1aml1jKc4PuQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0" (load)="isLoading=false"></iframe>
-</div>
+<h2>share a costume</h2>
+
+<p>
+  This project is powered by Github! All you need to share your own costume ideas is a Github account. We maintain a list of all possible costumes
+  <a
+    href="https://github.com/reaganhenke/costume-db-backend/blob/main/costumes.json"
+    target="_blank">in a public json file</a>. Example format:
+</p>
+
+<pre class="code">
+  {{ demo | json }}
+</pre>
+
+<p>You can find the repo and contribute on <a href="https://github.com/reaganhenke/costume-db-backend" target="_blank">Github</a>.</p>

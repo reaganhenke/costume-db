@@ -1,9 +1,12 @@
-.form-wrapper {
-  margin: auto;
-  display: flex;
-  justify-content: center;
+.code {
+  background-color: #222;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  overflow-x: scroll;
 }
 
-.hide {
-  display: none;
+a {
+  color: inherit;
 }

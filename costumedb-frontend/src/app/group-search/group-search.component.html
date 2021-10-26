@@ -2,7 +2,6 @@
 <ng-container *ngIf="!(loaded$ | async) && !(loading$ | async)">
   <div *ngIf="!groupSize">
     <div class="content-wrapper">
-      <p><i>hey early visitor! how'd you find us so fast? our backend isn't connected yet; come back soon!</i></p>
       <p>Finding the right group costume can be tricky. Luckily, we're here to help.<br>
         You can search our database for group costumes of all sizes, and even filter for certain hair colors!<br>
         Let's find your group the perfect costume.</p>
@@ -32,10 +31,11 @@
               <option value="">Any</option>
             </select>
             <label for="hair-{{i}}">Hair Color: </label>
-            <select id="hair-{{i}}" formControlName="hair_color">
-              <option value="blone">Blonde</option>
+            <select id="hair-{{i}}" formControlName="hair">
+              <option value="blond">Blonde</option>
               <option value="black">Black</option>
               <option value="brown">Brown</option>
+              <option value="red">Red</option>
               <option value="">Any</option>
             </select>  
           </span>
