@@ -5,3 +5,15 @@ export type CostumeResponseObject = {
   fandomLink?: string;
   description: string;
 };
+
+type character = {
+  hair: string;
+  gender: string;
+}
+
+
+export type GitRowsCostumeResponseObject =  CostumeResponseObject & {
+  theme: string[];
+  size: number;
+  characters: character[];
+}

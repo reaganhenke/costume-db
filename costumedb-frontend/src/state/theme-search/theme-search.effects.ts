@@ -11,7 +11,7 @@ export class ThemeSearchEffects {
     this.actions$.pipe(
       ofType(ThemeSearchActions.loadThemeSearch),
       switchMap((action) =>
-        this.searchService.loadCostumesByText(action.request).pipe(
+        this.searchService.loadCostumesByTheme(action.request).pipe(
           map((response) =>
             ThemeSearchActions.loadThemeSearchSuccess({ response })
           ),

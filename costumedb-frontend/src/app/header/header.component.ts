@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
   submitSearch() {
     let value = (this.search.value).replace(/[^A-Za-z ]/g, '');
-    if (value) {
+    if (value && value.length > 2) {
       this.store.dispatch(loadTextSearch({request: value}));
     }
   }

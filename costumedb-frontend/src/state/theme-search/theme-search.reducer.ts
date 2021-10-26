@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { CostumeResponseObject } from 'src/app/models/costume-response.model';
+import { CostumeResponseObject, GitRowsCostumeResponseObject } from 'src/app/models/costume-response.model';
 import * as ThemeSearchActions from './theme-search.actions';
 
 export interface ThemeSearchState {
@@ -7,7 +7,7 @@ export interface ThemeSearchState {
   loaded: boolean;
   error: string | null;
   theme: string;
-  results: Map<string, CostumeResponseObject[]>;
+  results: Map<string, GitRowsCostumeResponseObject[]>;
 }
 
 export const initialState: ThemeSearchState = {

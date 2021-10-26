@@ -19,34 +19,37 @@ The group search form collects information about a group in an array. The model 
 Example:
 ```json
 [{
-  "name": "person1",
   "gender": "male",
-  "hair_color": "brown"
+  "hair": "brown"
 }, {
-  "name": "person2",
   "gender": "",
-  "hair_color": "red"
+  "hair": "red"
 }]
 ```
 
-The site expects a response with fields name, origin, imageUrl, fandomLink and description. The model is defined in [costume-response.model.ts](/costumedb-frontend/src/app/models/costume-response.model.ts)
+The site expects a response with fields name, origin, imageUrl, fandomLink, size, themes, characters, and description. The model is defined in [costume-response.model.ts](/costumedb-frontend/src/app/models/costume-response.model.ts)
 
 Example:
 ```json
 [
   {
-    "name": "Ross and Rachel",
+    "name": "Ross & Rachel",
     "origin": "Friends",
     "imageUrl": "https://static.wikia.nocookie.net/friends/images/c/c9/Ross_and_Rachel_-_Final_Kiss_-_10x18.png",
     "fandomLink": "https://friends.fandom.com/wiki/Ross_and_Rachel",
-    "description": "On again off again Rachel and Ross are one of the central couples on Friends. Were they on a break? It's up to you!"
-  },
-  {
-    "name": "Belcher Kids",
-    "origin": "Bob's Burgers",
-    "imageUrl": "https://i.imgur.com/95UDajH.png",
-    "fandomLink": "https://bobs-burgers.fandom.com/wiki/Belcher_Family",
-    "description": "No siblings are closer than Tina, Gene, and Louise!"
+    "description": "On again off again Rachel and Ross are one of the central couples on Friends. Were they on a break? It's up to you!",
+    "theme": ["couple", "television"],
+    "size": 2,
+    "characters": [
+      {
+        "hair": "brown",
+        "gender": "male"
+      },
+      {
+        "hair": "blond",
+        "gender": "female"
+      }
+    ]
   }
 ]
 ```
@@ -75,9 +78,9 @@ Example:
 - [x] add privacy policy
 - [x] add terms of use
 - [x] fill out credits
+- [x] add google analytics
+- [x] fix web manifest issue
+- [x] update themes to be correct
+- [x] source database images
 
-- [ ] add google analytics
-- [ ] update themes to be correct
-- [ ] source database images
-- [ ] fix web manifest
 - [ ] reduce scss size for group search and header

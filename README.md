@@ -1,8 +1,5 @@
 # CostumeDB
 
-WIP - a searchable halloween costume database for you and your friends
+A searchable halloween costume database for you and your friends! This project is still a work in progress, we have a database API under construction, but in the meantime we're using Gitrows through [costume-db-backend](https://github.com/reaganhenke/costume-db-backend) to act as a database that anyone can contribute to. 
 
-built by [reagan](https://github.com/reaganhenke) and [stephen](https://github.com/stephenwashington)
-
-
-TODO: add more info about architecture and links to deployments, etc
+Built by [Reagan](https://github.com/reaganhenke) and [Stephen](https://github.com/stephenwashington).

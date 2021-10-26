@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { AppState } from 'src/state/appState';
 import { loadThemeSearch } from 'src/state/theme-search/theme-search.actions';
 import { CostumeResponseObject } from '../models/costume-response.model';
@@ -30,6 +30,7 @@ export class ThemePageComponent {
         let curTheme = this.theme;
         this.results$ = this.store.select(state => state.themeSearch.results.get(curTheme));
         this.results$.pipe(
+          first(),
           map(results => {
             if (!results?.length) {
               this.store.dispatch(loadThemeSearch({request: curTheme}));
