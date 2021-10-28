@@ -42,9 +42,10 @@ export class GroupSearchComponent implements OnDestroy {
   getNewFormGroup() {
     return this.fb.group({
       gender: new FormControl(''),
-      hair: new FormControl('')
-      // showAdvanced: new FormControl(false),
-      // bodyType: new FormControl('')
+      hair: new FormControl(''),
+      showAdvanced: new FormControl(false),
+      glasses: new FormControl(''),
+      pet: new FormControl('')
     });
   }
 
@@ -74,8 +75,7 @@ export class GroupSearchComponent implements OnDestroy {
   submit() {
     let values: CostumeRequestObject[] = [];
     this.group.forEach((costume, i) => {
-    // //   // costume.removeControl('showAdvanced');
-    // //   values.push({...costume.value, name: 'person' + i})
+      costume.removeControl('showAdvanced');
       values.push(costume.value);
     });
     this.store.dispatch(loadGroupCostumes({request: values}));
@@ -85,9 +85,10 @@ export class GroupSearchComponent implements OnDestroy {
     for(let costumeForm of this.group) {
       costumeForm.reset({
         'gender': '',
-        'hair': ''
-        // showAdvanced': false,
-        // 'bodyType': ''
+        'hair': '',
+        'showAdvanced': false,
+        'glasses': '',
+        'pet': ''
       });
     }
   }

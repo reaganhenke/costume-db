@@ -18,8 +18,8 @@ export class SearchService {
       map(costumes => {
         let sortedReq = [...request];
         sortedReq.sort((a,b) => {
-          let aScore = (!!a.gender && !!a.hair) ? 2 : (!!a.gender || !!a.hair ? 1 : 0);
-          let bScore = (!!b.gender && !!b.hair) ? 2 : (!!b.gender || !!b.hair ? 1 : 0);
+          let aScore = (!!a.gender ? 1 : 0) + (!!a.hair ? 1 : 0) + (!!a.glasses ? 1 : 0) + (!!a.pet ? 1 : 0);
+          let bScore = (!!b.gender ? 1 : 0) + (!!b.hair ? 1 : 0) + (!!b.glasses ? 1 : 0) + (!!b.pet ? 1 : 0);
           return bScore - aScore;
         });
 
@@ -27,7 +27,9 @@ export class SearchService {
           sortedReq.forEach(costumeReq => {
             let foundIndex = (costume.characters).findIndex((cos => {
               return (!costumeReq.gender || (costumeReq.gender === cos.gender)) &&
-              (!costumeReq.hair || (costumeReq.hair === cos.hair));
+              (!costumeReq.hair || (costumeReq.hair === cos.hair)) &&
+              (!costumeReq.glasses || (costumeReq.glasses === cos.glasses)) &&
+              (!costumeReq.pet || (costumeReq.pet === cos.pet));
             }));
 
             if (foundIndex >= 0) {
