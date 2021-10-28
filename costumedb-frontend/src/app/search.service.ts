@@ -25,11 +25,11 @@ export class SearchService {
 
         return costumes.filter((costume) => {
           sortedReq.forEach(costumeReq => {
-            let foundIndex = (costume.characters).findIndex((cos => {
+            let foundIndex = (costume.characters).findIndex((cos => {  
               return (!costumeReq.gender || (costumeReq.gender === cos.gender)) &&
               (!costumeReq.hair || (costumeReq.hair === cos.hair)) &&
-              (!costumeReq.glasses || (costumeReq.glasses === cos.glasses)) &&
-              (!costumeReq.pet || (costumeReq.pet === cos.pet));
+              (!costumeReq.glasses || (costumeReq.glasses.toString() === cos.glasses)) &&
+              (!costumeReq.pet || (costumeReq.pet.toString() === cos.pet));
             }));
 
             if (foundIndex >= 0) {
