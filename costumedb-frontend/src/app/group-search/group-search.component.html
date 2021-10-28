@@ -36,22 +36,30 @@
               <option value="black">Black</option>
               <option value="brown">Brown</option>
               <option value="red">Red</option>
+              <option value="gray">Gray</option>
+              <option value="blue">Blue</option>
+              <option value="pink">Pink</option>
+              <option value="green">Green</option>
               <option value="">Any</option>
             </select>  
           </span>
           
-          <!-- <span class="advancedToggle">
-            <input type="checkbox" id="hair-{{i}}" formControlName="showAdvanced">  
-            <span></span><label for="hair-{{i}}">show advanced</label>
-          </span> -->
+          <span class="checkbox">
+            <input type="checkbox" id="advanced-toggle-{{i}}" formControlName="showAdvanced">  
+            <span></span><label for="advanced-toggle-{{i}}">show advanced</label>
+          </span>
 
-          <!-- <div *ngIf="costume.get('showAdvanced')?.value" class="advanced">
-            <label for="body-{{i}}">body type: </label>
-            <select id="body-{{i}}" formControlName="bodyType">
-              <option value="">Any</option>
-            </select>
-          </div> -->
+          <span class="advanced">
+            <div *ngIf="costume.get('showAdvanced')?.value" class="advanced checkbox">
+              <input type="checkbox" id="glasses-{{i}}" formControlName="glasses">  
+              <span></span><label for="glasses-{{i}}">has glasses</label>
+            </div>
 
+            <div *ngIf="costume.get('showAdvanced')?.value" class="advanced checkbox">
+              <input type="checkbox" id="pet-{{i}}" formControlName="pet">  
+              <span></span><label for="pet-{{i}}">is animal</label>
+            </div>
+          </span>
         </form>
 
     </div>

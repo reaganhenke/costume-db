@@ -84,13 +84,13 @@ a {
   transition: all 0.2s;
 
   form {
-    margin: 1.5rem auto;
+    margin: 1.5rem auto 1rem auto;
   }
 
   .ghost {
     position: absolute;
     width: 70px;
-    bottom: 16px;
+    bottom: 35px;
     opacity: 70%;
   }
 
@@ -164,13 +164,22 @@ select {
 .advanced {
   display: flex;
   align-items: center;
+}
+
+.basics {
   label:not(:first-child) {
     margin-left: 16px;
   }
 }
 
-.advancedToggle {
-  margin: 16px 0;
+.advanced {
+  div:first-child label {
+    margin-right: 16px;
+  }
+}
+
+.checkbox {
+  margin-top: 8px;
   display: flex;
   align-items: center;
   font-size: 0.9rem;

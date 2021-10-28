@@ -9,6 +9,8 @@ export type CostumeResponseObject = {
 type character = {
   hair: string;
   gender: string;
+  glasses?: boolean;
+  pet?: boolean;
 }
 
 
