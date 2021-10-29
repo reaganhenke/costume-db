@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   submitSearch() {
-    let value = (this.search.value).replace(/[^A-Za-z ]/g, '');
+    let value = (this.search.value).replace(/[^A-Za-z ]/g, '').toLowerCase();
     if (value && value.length > 2) {
       this.store.dispatch(loadTextSearch({request: value}));
     }
