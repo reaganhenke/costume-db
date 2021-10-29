@@ -26,10 +26,10 @@ export class SearchService {
         return costumes.filter((costume) => {
           sortedReq.forEach(costumeReq => {
             let foundIndex = (costume.characters).findIndex((cos => {  
-              return (!costumeReq.gender || (costumeReq.gender === cos.gender)) &&
-              (!costumeReq.hair || (costumeReq.hair === cos.hair)) &&
-              (!costumeReq.glasses || (costumeReq.glasses === cos.glasses)) &&
-              (!costumeReq.pet || (costumeReq.pet === cos.pet));
+              return (!costumeReq.gender || (costumeReq.gender === cos.gender) || (cos.gender === "any")) &&
+              (!costumeReq.hair || (costumeReq.hair === cos.hair) || (cos.hair === "any")) &&
+              (costumeReq.glasses ? cos.glasses : true) &&
+              (costumeReq.pet ? cos.pet : true);
             }));
 
             if (foundIndex >= 0) {
